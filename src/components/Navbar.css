@@ -22,8 +22,27 @@ nav {
 }
 
 #nav-links a {
+    box-sizing: border-box;
     color: white;
     font-size: 1.25rem;
     font-weight: 600;
+    letter-spacing: 0.15rem;
     text-decoration: none;
+    transition: 0.2s ease-in-out;
+}
+
+#nav-links a:after {
+    border-bottom: solid 3px var(--accent);
+    content: '';
+    display: block;
+    transform: scaleX(0);
+    transition: transform 250ms ease-in-out;
+}
+
+#nav-links a:hover:after {
+    transform: scaleX(1);
+}
+
+#nav-links a:hover {
+    color: var(--light-grey);
 }
