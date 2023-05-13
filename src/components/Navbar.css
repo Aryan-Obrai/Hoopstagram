@@ -4,29 +4,34 @@ nav {
     border-bottom: 3px solid var(--accent);
     display: flex;
     flex-direction: row;
-    height: 75px;
+    height: 90px;
     justify-content: space-between;
+    position: fixed;
     width: 100vw;
     z-index: 999;
 }
 
 #logo {
-    margin-left: 75px;
+    margin-left: 30%;
+}
+
+#container {
+    align-items: center;
+    display: flex;
+    height: 30px;
 }
 
 #nav-links {
     display: flex;
     justify-content: space-evenly;
-    margin-right: 200px;
-    width: 35%;
+    width: 550px;
 }
 
 #nav-links a {
     box-sizing: border-box;
     color: white;
-    font-size: 1.25rem;
-    font-weight: 600;
-    letter-spacing: 0.15rem;
+    font-size: 1.20rem;
+    font-weight: 700;
     text-decoration: none;
     transition: 0.2s ease-in-out;
 }
@@ -45,4 +50,35 @@ nav {
 
 #nav-links a:hover {
     color: var(--light-grey);
+}
+
+#account-btns {
+    display: flex;
+    margin-right: 5%;
+}
+
+#account-btns button {
+    background: none;
+    border: none;
+    color: var(--grey);
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: 0.3s ease-in-out;
+    width: 100px;
+}
+
+#account-btns button:hover {
+    color: var(--accent);
+}
+
+#account-btns :first-child {
+    border-right: 1px solid var(--grey);
+    padding-right: 20px;
+}
+
+#account-btns :nth-child(2) {
+    border-left: 1px solid var(--grey);
+    padding-left: 20px;
 }
