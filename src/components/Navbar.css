@@ -12,7 +12,7 @@ nav {
 }
 
 #logo {
-    margin-left: 30%;
+    margin-left: 2%;
 }
 
 #container {
@@ -24,6 +24,7 @@ nav {
 #nav-links {
     display: flex;
     justify-content: space-evenly;
+    list-style: none;
     width: 550px;
 }
 
@@ -66,7 +67,7 @@ nav {
     font-size: 1rem;
     font-weight: 500;
     transition: 0.3s ease-in-out;
-    width: 100px;
+    width: 90px;
 }
 
 #account-btns button:hover {
@@ -75,10 +76,8 @@ nav {
 
 #account-btns :first-child {
     border-right: 1px solid var(--grey);
-    padding-right: 20px;
 }
 
 #account-btns :nth-child(2) {
     border-left: 1px solid var(--grey);
-    padding-left: 20px;
 }
