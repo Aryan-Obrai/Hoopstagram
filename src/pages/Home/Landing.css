@@ -2,7 +2,7 @@
     display: flex;
     left: 50%;
     position: absolute;
-    top: 20%;
+    top: 15%;
     transform: translateX(-50%);
 }
 
@@ -39,13 +39,13 @@
 }
 
 #NBA-graphic {
-    height: 500px;
+    height: 650px;
     margin-left: 40px;
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 #main-btns {
-    bottom: -90px;
+    bottom: -20px;
     display: flex;
     flex-direction: row;
     gap: 30px;

@@ -1,6 +1,6 @@
-import "./LandingGraphic.css";
+import "./Landing.css";
 
-function LandingGraphic() {
+function Landing() {
   return (
     <div id="main">
       <div id="main-text">
@@ -21,4 +21,4 @@ function LandingGraphic() {
   );
 }
 
-export default LandingGraphic;
+export default Landing;
