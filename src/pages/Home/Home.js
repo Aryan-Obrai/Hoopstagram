@@ -1,6 +1,8 @@
 import "./Home.css";
 import Landing from "./Landing";
 import FeedDescription from "./FeedDescription";
+import GamesDescription from "./GamesDescription";
+import TPDescription from "./TPDescription";
 
 function Home() {
   return (
@@ -11,8 +13,12 @@ function Home() {
       <section id="feed-section">
         <FeedDescription />
       </section>
-      <section id="games-description"></section>
-      <section id="teams-description"></section>
+      <section id="games-section">
+        <GamesDescription />
+      </section>
+      <section id="tp-section">
+        <TPDescription />
+      </section>
     </div>
   );
 }

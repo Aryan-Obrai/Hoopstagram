@@ -1,10 +1,10 @@
-import "./FeedDescription.css";
+import "./TPDescription.css";
 
-function FeedDescription() {
+function TPDescription() {
   return (
     <div>
-      <div id="feed-description">
-        <h1>Discussion Feed</h1>
+      <div id="tp-description">
+        <h1>Teams & Players Hub</h1>
         <p>
           PLACE HOLDER FOR EXPLANATION Lorem ipsum dolor sit amet, consectetur
           adipiscing elit. Morbi vitae lacus a justo efficitur malesuada sit
@@ -24,4 +24,4 @@ function FeedDescription() {
   );
 }
 
-export default FeedDescription;
+export default TPDescription;

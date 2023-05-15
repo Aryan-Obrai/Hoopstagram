@@ -1,10 +1,10 @@
-import "./FeedDescription.css";
+import "./GamesDescription.css";
 
-function FeedDescription() {
+function GamesDescription() {
   return (
     <div>
-      <div id="feed-description">
-        <h1>Discussion Feed</h1>
+      <div id="games-description">
+        <h1>Games Page</h1>
         <p>
           PLACE HOLDER FOR EXPLANATION Lorem ipsum dolor sit amet, consectetur
           adipiscing elit. Morbi vitae lacus a justo efficitur malesuada sit
@@ -24,4 +24,4 @@ function FeedDescription() {
   );
 }
 
-export default FeedDescription;
+export default GamesDescription;
