@@ -39,13 +39,13 @@
 }
 
 #NBA-graphic {
-    height: 650px;
+    height: 600px;
     margin-left: 40px;
     margin-top: 30px;
 }
 
 #main-btns {
-    bottom: -20px;
+    bottom: -30px;
     display: flex;
     flex-direction: row;
     gap: 30px;
@@ -60,22 +60,16 @@
     padding: 20px;
     transition: 0.5s ease-in-out;
     background-size: 200% 100%;
-    background-position: right bottom;
-}
-
-#main-btns button:hover {
-    background-position: left bottom;
-    color: var(--post-bg);
 }
 
 #signup-btn {
-    background: linear-gradient(to right, var(--light-grey) 50%, var(--post-bg) 50%);
+    background-color: var(--post-bg);
     border: 3px solid var(--accent);
     color: var(--accent);
 }
 
 #login-btn {
-    background: linear-gradient(to right, var(--light-grey) 50%, var(--accent) 50%);
+    background-color: var(--accent);
     border: 3px solid var(--post-bg);
     color: var(--post-bg)
 }
