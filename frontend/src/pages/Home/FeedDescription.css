@@ -9,3 +9,7 @@
     font-size: 3rem;
     margin: 0;
 }
+
+#feed-description p {
+    font-size: 2.25rem;
+}
