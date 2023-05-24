@@ -1,0 +1,15 @@
+#games-description {
+    color: white;
+    margin: 0 auto;
+    width: 65%;
+    padding-top: 150px;
+}
+
+#games-description h1 {
+    font-size: 3rem;
+    margin: 0;
+}
+
+#games-description p {
+    font-size: 2.25rem;
+}
