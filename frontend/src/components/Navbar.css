@@ -74,10 +74,6 @@ nav {
     color: var(--accent);
 }
 
-#account-btns :first-child {
-    border-right: 1px solid var(--grey);
-}
-
 #account-btns :nth-child(2) {
-    border-left: 1px solid var(--grey);
+    border-left: 2px solid var(--grey);
 }

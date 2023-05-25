@@ -1,0 +1,25 @@
+{
+  "name": "hoopstagram",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.2.1",
+    "nodemon": "^2.0.22"
+  },
+  "scripts": {
+    "test": "test",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UCR-CS110-S23/project-hoopstagram.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/UCR-CS110-S23/project-hoopstagram/issues"
+  },
+  "homepage": "https://github.com/UCR-CS110-S23/project-hoopstagram#readme"
+}

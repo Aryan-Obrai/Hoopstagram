@@ -22,8 +22,12 @@ function Navbar() {
           </li>
         </ul>
         <div id="account-btns">
-          <button>Sign-up</button>
-          <button>Login</button>
+          <Link to="/signup">
+            <button>Sign-up</button>
+          </Link>
+          <Link to="/login">
+            <button>Login</button>
+          </Link>
         </div>
       </div>
     </nav>
