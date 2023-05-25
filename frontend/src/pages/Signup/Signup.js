@@ -10,12 +10,21 @@ function Signup() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const data = await fetch("http://localhost:5000/signup", {
+
+    const response = await fetch("http://localhost:5000/signup", {
       method: "POST",
       mode: "cors",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        fname: fnameRef.current.value,
+        lname: lnameRef.current.value,
+        email: emailRef.current.value,
+        password: passwordRef.current.value,
+      }),
     });
-    console.log(data);
-    console.log("submitted");
   }
 
   return (

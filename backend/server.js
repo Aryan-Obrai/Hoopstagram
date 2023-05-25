@@ -2,6 +2,9 @@ const express = require("express");
 const cors = require("cors");
 
 app = express();
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(cors());
 
 //GET Methods
@@ -19,8 +22,9 @@ app.get("/teams+players", (req, res) => {});
 app.post("/post", (req, res) => {});
 
 app.post("/signup", (req, res) => {
+  console.log("POSTED");
   console.log(req.body);
-  res.status(201).json({ yes: "yes" });
+  res.status(201).send("yes");
 });
 
 app.post("/login", (req, res) => {});

@@ -53,8 +53,9 @@
 .existing-user-prompt {
     align-items: center;
     display: flex;
+    font-size: 0.9rem;
     gap: 5px;
-    margin: 10px auto 0;
+    margin: 0 auto;
 }
 
 .here {
