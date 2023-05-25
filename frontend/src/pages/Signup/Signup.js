@@ -9,7 +9,7 @@ function Signup() {
   const passwordRef = useRef();
 
   async function handleSubmit(e) {
-    e.preventDefault();
+    e.preventDefault(); //FIXME
     const response = await fetch("http://localhost:5000/signup", {
       method: "POST",
       mode: "cors",
@@ -60,7 +60,7 @@ function Signup() {
           autoComplete="off"
         ></input>
         <button id="signup-form-btn" type="submit">
-          Sign up 🏀
+          Sign up 🚀
         </button>
         <div className="existing-user-prompt">
           <p>Already have an account? Login </p>

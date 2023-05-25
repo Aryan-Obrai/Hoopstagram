@@ -10,10 +10,6 @@ app.use(cors());
 //GET Methods
 app.get("/feed", (req, res) => {});
 
-app.get("/signup", (req, res) => {});
-
-app.get("/login", (req, res) => {});
-
 app.get("/games", (req, res) => {});
 
 app.get("/teams+players", (req, res) => {});
@@ -22,12 +18,16 @@ app.get("/teams+players", (req, res) => {});
 app.post("/post", (req, res) => {});
 
 app.post("/signup", (req, res) => {
-  console.log("POSTED");
+  console.log("SIGNUP");
   console.log(req.body);
   res.status(201).json({ success: true, redirectURL: "/feed" });
 });
 
-app.post("/login", (req, res) => {});
+app.post("/login", (req, res) => {
+  console.log("LOGIN");
+  console.log(req.body);
+  res.status(201).json({ success: true, redirectURL: "/feed" });
+});
 
 app.listen(5000, () => {
   console.log("Server running on port 5000");
