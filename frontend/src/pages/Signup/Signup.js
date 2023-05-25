@@ -10,7 +10,6 @@ function Signup() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-
     const response = await fetch("http://localhost:5000/signup", {
       method: "POST",
       mode: "cors",
@@ -25,6 +24,9 @@ function Signup() {
         password: passwordRef.current.value,
       }),
     });
+    //expected: status code and redirect URL if success, errorMessage if not
+    const responseData = await response.json();
+    console.log(responseData);
   }
 
   return (

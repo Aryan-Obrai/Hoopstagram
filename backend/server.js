@@ -24,7 +24,7 @@ app.post("/post", (req, res) => {});
 app.post("/signup", (req, res) => {
   console.log("POSTED");
   console.log(req.body);
-  res.status(201).send("yes");
+  res.status(201).json({ success: true, redirectURL: "/feed" });
 });
 
 app.post("/login", (req, res) => {});
