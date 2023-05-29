@@ -1,10 +1,13 @@
 import "./Login.css";
 import { Link } from "react-router-dom";
 import { useRef } from "react";
+import { UserContext } from "../../contexts/UserContext";
+import { useContext } from "react";
 
 function Login() {
   const emailRef = useRef();
   const passwordRef = useRef();
+  const { setUser } = useContext(UserContext);
 
   async function handleSubmit(e) {
     e.preventDefault(); //FIXME
@@ -22,7 +25,8 @@ function Login() {
     });
     //expected: status code and redirect URL if success, errorMessage if not
     const responseData = await response.json();
-    console.log(responseData);
+    setUser(responseData.user);
+    console.log(responseData.user);
   }
 
   return (

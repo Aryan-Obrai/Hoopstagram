@@ -20,13 +20,20 @@ app.post("/post", (req, res) => {});
 app.post("/signup", (req, res) => {
   console.log("SIGNUP");
   console.log(req.body);
-  res.status(201).json({ success: true, redirectURL: "/feed" });
+  res.status(201).json({
+    success: true,
+    redirectURL: "/feed",
+  });
 });
 
 app.post("/login", (req, res) => {
   console.log("LOGIN");
   console.log(req.body);
-  res.status(201).json({ success: true, redirectURL: "/feed" });
+  res.status(201).json({
+    success: true,
+    redirectURL: "/feed",
+    user: { username: "User 1" },
+  });
 });
 
 app.listen(5000, () => {

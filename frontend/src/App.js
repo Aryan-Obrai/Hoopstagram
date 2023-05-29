@@ -7,20 +7,30 @@ import Games from "./pages/Games/Games";
 import TeamsPlayers from "./pages/TeamsPlayers/TeamsPlayers";
 import Signup from "./pages/Signup/Signup";
 import Login from "./pages/Login/Login";
+import { UserContext } from "./contexts/UserContext";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [user, setUser] = useState(null);
+
+  // useEffect(() => {
+  //   console.log(user);
+  // });
+
   return (
     <div>
-      <Navbar />
+      <UserContext.Provider value={{ user, setUser }}>
+        <Navbar />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/feed" element={<Feed />} />
-        <Route path="/games" element={<Games />} />
-        <Route path="/teams+players" element={<TeamsPlayers />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/feed" element={<Feed />} />
+          <Route path="/games" element={<Games />} />
+          <Route path="/teams+players" element={<TeamsPlayers />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </UserContext.Provider>
     </div>
   );
 }
