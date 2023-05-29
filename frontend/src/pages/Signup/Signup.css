@@ -13,7 +13,8 @@
 }
 
 #signup-form h1 {
-    color: var(--accent)
+    color: var(--accent);
+    margin: 0 0 20px;
 }
 
 #signup-form label {
@@ -61,4 +62,9 @@
 .here {
     color: var(--accent);
     text-decoration: none;
+}
+
+.error-msg {
+    color: rgb(252, 102, 102);
+    margin: 0 0 10px;
 }

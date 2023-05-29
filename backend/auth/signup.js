@@ -7,19 +7,19 @@ async function signup(req, res) {
     isValidRequest(req, res);
 
     const { fname, lname, email, password } = req.body;
-    //await checkAvailableEmail(email, req, res);
+    await checkAvailableEmail(email, req, res);
 
     //hash password
     let saltRounds = 10;
     const salt = await bcrypt.genSalt(saltRounds);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    // const newUser = await User.create({
-    //   firstName: fname,
-    //   lastName: lname,
-    //   email: email,
-    //   password: hashedPassword,
-    // });
+    const newUser = await User.create({
+      firstName: fname,
+      lastName: lname,
+      email: email,
+      password: hashedPassword,
+    });
 
     console.log("Signed up");
 
@@ -36,7 +36,6 @@ async function signup(req, res) {
 function isValidRequest(req, res) {
   for (const field in req.body) {
     if (req.body[field].length == 0) {
-      //make res
       throw new Error("Empty field submitted in sign up");
     }
   }
@@ -47,8 +46,8 @@ async function checkAvailableEmail(email, req, res) {
   const query = await User.find({ email: email });
 
   if (query.length > 0) {
-    req.flash("errorMessage", "Email in use already"); //dependent on flash in server.js
-    res.redirect("/signup");
+    res.status(422).send({ errorMsg: "That email is taken!" });
+    throw new Error("User already exists");
   }
 }
 

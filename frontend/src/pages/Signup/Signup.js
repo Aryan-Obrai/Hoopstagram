@@ -1,6 +1,6 @@
 import "./Signup.css";
 import { Link } from "react-router-dom";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 function Signup() {
   const fnameRef = useRef();
@@ -8,31 +8,57 @@ function Signup() {
   const emailRef = useRef();
   const passwordRef = useRef();
 
+  let [errorMsg, setErrorMsg] = useState("");
+
+  function validSubmission() {
+    //submission must be not empty
+    if (
+      fnameRef.current.value &&
+      lnameRef.current.value &&
+      emailRef.current.value &&
+      passwordRef.current.value
+    ) {
+      return true;
+    } else {
+      setErrorMsg("Please fill out all fields");
+      return false;
+    }
+  }
+
   async function handleSubmit(e) {
     e.preventDefault(); //FIXME
-    const response = await fetch("http://localhost:5000/auth/signup", {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        fname: fnameRef.current.value,
-        lname: lnameRef.current.value,
-        email: emailRef.current.value,
-        password: passwordRef.current.value,
-      }),
-    });
-    //expected: status code and redirect URL if success, errorMessage if not
-    const responseData = await response.json();
-    console.log(responseData);
+
+    //proceed if non empty submission
+    if (validSubmission()) {
+      const response = await fetch("http://localhost:5000/auth/signup", {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fname: fnameRef.current.value,
+          lname: lnameRef.current.value,
+          email: emailRef.current.value,
+          password: passwordRef.current.value,
+        }),
+      });
+      //expected: status code and redirect URL if success, errorMessage if not
+      const responseData = await response.json();
+
+      //email already taken
+      if (responseData.errorMsg) {
+        setErrorMsg(responseData.errorMsg);
+      }
+    }
   }
 
   return (
     <div>
       <form id="signup-form" onSubmit={(e) => handleSubmit(e)}>
         <h1>Welcome!</h1>
+        {errorMsg ? <p className="error-msg">{errorMsg}</p> : ""}
         <label htmlFor="fname">First Name</label>
         <input
           ref={fnameRef}
@@ -49,7 +75,9 @@ function Signup() {
           name="lname"
           autoComplete="off"
         ></input>
+
         <label htmlFor="email">Email</label>
+
         <input ref={emailRef} type="email" id="email" name="email"></input>
         <label htmlFor="text">Password</label>
         <input
