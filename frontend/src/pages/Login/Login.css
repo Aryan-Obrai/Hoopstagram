@@ -62,3 +62,8 @@
     color: var(--accent);
     text-decoration: none;
 }
+
+.error-msg {
+    color: rgb(252, 102, 102);
+    margin: 0 0 10px;
+}

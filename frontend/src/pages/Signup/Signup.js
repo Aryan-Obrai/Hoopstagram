@@ -26,9 +26,8 @@ function Signup() {
   }
 
   async function handleSubmit(e) {
-    e.preventDefault(); //FIXME
+    e.preventDefault();
 
-    //proceed if non empty submission
     if (validSubmission()) {
       const response = await fetch("http://localhost:5000/auth/signup", {
         method: "POST",
@@ -51,6 +50,8 @@ function Signup() {
       if (responseData.errorMsg) {
         setErrorMsg(responseData.errorMsg);
       }
+
+      //FIXME: Response for successful sign up
     }
   }
 
