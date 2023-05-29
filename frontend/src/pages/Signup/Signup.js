@@ -10,7 +10,7 @@ function Signup() {
 
   async function handleSubmit(e) {
     e.preventDefault(); //FIXME
-    const response = await fetch("http://localhost:5000/signup", {
+    const response = await fetch("http://localhost:5000/auth/signup", {
       method: "POST",
       mode: "cors",
       headers: {
