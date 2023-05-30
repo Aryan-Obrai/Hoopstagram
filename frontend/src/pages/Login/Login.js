@@ -5,7 +5,7 @@ import { UserContext } from "../../contexts/UserContext";
 import { useContext, useState } from "react";
 
 function Login() {
-  const emailRef = useRef();
+  const usernameRef = useRef();
   const passwordRef = useRef();
   const { setUser } = useContext(UserContext);
 
@@ -13,7 +13,7 @@ function Login() {
 
   function validSubmission() {
     //submission must be not empty
-    if (emailRef.current.value && passwordRef.current.value) {
+    if (usernameRef.current.value && passwordRef.current.value) {
       return true;
     } else {
       setErrorMsg("Please fill out all fields");
@@ -32,8 +32,9 @@ function Login() {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
+
         body: JSON.stringify({
-          email: emailRef.current.value,
+          username: usernameRef.current.value,
           password: passwordRef.current.value,
         }),
       });
@@ -55,8 +56,13 @@ function Login() {
       <form id="login-form" onSubmit={(e) => handleSubmit(e)}>
         <h1>Welcome back!</h1>
         {errorMsg ? <p className="error-msg">{errorMsg}</p> : ""}
-        <label htmlFor="email">Email</label>
-        <input ref={emailRef} type="email" id="email" name="email"></input>
+        <label htmlFor="username">Username</label>
+        <input
+          ref={usernameRef}
+          type="text"
+          id="username"
+          name="username"
+        ></input>
         <label htmlFor="text">Password</label>
         <input
           ref={passwordRef}

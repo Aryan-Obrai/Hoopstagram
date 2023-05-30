@@ -60,7 +60,6 @@
 
 .here {
     color: var(--accent);
-    text-decoration: none;
 }
 
 .error-msg {

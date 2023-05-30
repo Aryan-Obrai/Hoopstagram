@@ -5,17 +5,17 @@ async function signup(req, res) {
   try {
     isValidRequest(req, res);
 
-    const { fname, lname, email, password } = req.body;
-    await checkAvailableEmail(email, req, res);
+    const { username, email, password } = req.body;
+    await checkAvailableEmail(email, res);
 
     //hash password
     let saltRounds = 10;
     const salt = await bcrypt.genSalt(saltRounds);
     const hashedPassword = await bcrypt.hash(password, salt);
 
+    //create user and save to MongoDB
     const newUser = await User.create({
-      firstName: fname,
-      lastName: lname,
+      username: username,
       email: email,
       password: hashedPassword,
     });

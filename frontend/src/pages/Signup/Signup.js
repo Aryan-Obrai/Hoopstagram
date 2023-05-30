@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import { useRef, useState } from "react";
 
 function Signup() {
-  const fnameRef = useRef();
-  const lnameRef = useRef();
+  const usernameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
 
@@ -13,8 +12,7 @@ function Signup() {
   function validSubmission() {
     //submission must be not empty
     if (
-      fnameRef.current.value &&
-      lnameRef.current.value &&
+      usernameRef.current.value &&
       emailRef.current.value &&
       passwordRef.current.value
     ) {
@@ -37,8 +35,7 @@ function Signup() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          fname: fnameRef.current.value,
-          lname: lnameRef.current.value,
+          username: usernameRef.current.value,
           email: emailRef.current.value,
           password: passwordRef.current.value,
         }),
@@ -60,20 +57,12 @@ function Signup() {
       <form id="signup-form" onSubmit={(e) => handleSubmit(e)}>
         <h1>Welcome!</h1>
         {errorMsg ? <p className="error-msg">{errorMsg}</p> : ""}
-        <label htmlFor="fname">First Name</label>
+        <label htmlFor="username">Username</label>
         <input
-          ref={fnameRef}
+          ref={usernameRef}
           type="text"
-          id="fname"
-          name="fname"
-          autoComplete="off"
-        ></input>
-        <label htmlFor="lname">Last Name</label>
-        <input
-          ref={lnameRef}
-          type="text"
-          id="lname"
-          name="lname"
+          id="username"
+          name="username"
           autoComplete="off"
         ></input>
 

@@ -1,20 +1,52 @@
+//Imports
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
 const mongoose = require("mongoose");
-const authRoutes = require("./auth/authRoutes");
+const passport = require("passport");
+const authRoutes = require("./routes/authRoutes");
 
 app = express();
 
+//Middleware
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(cors());
 
-//Authentication routes
+app.use(express.json());
+
+app.use(cookieParser());
+
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
+
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
+require("./auth/passportConfig")(passport);
+app.use(passport.initialize());
+app.use(passport.session());
+
+//Authentication routes for signup and login
 app.use("/auth", authRoutes);
 
 //GET Methods
-app.get("/feed", (req, res) => {});
+app.get("/feed", (req, res) => {
+  if (req.user) {
+    res.send(req.user);
+  } else {
+    res.send({ msg: "NOT LOGGED IN" });
+  }
+});
 
 app.get("/games", (req, res) => {});
 
