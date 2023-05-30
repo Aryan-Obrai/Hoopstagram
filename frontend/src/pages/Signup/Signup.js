@@ -1,6 +1,7 @@
 import "./Signup.css";
-import { Link } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
 import { useRef, useState } from "react";
+import PickTeams from "./PickTeams";
 
 function Signup() {
   const usernameRef = useRef();
@@ -8,6 +9,7 @@ function Signup() {
   const passwordRef = useRef();
 
   let [errorMsg, setErrorMsg] = useState("");
+  let [success, setSuccess] = useState(false);
 
   function validSubmission() {
     //submission must be not empty
@@ -34,26 +36,28 @@ function Signup() {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify({
           username: usernameRef.current.value,
           email: emailRef.current.value,
           password: passwordRef.current.value,
         }),
       });
-      //expected: status code and redirect URL if success, errorMessage if not
+      //expected: errorMessage if not succesful
       const responseData = await response.json();
 
-      //email already taken
       if (responseData.errorMsg) {
         setErrorMsg(responseData.errorMsg);
+      } else if (responseData.success) {
+        setSuccess(true);
+        //redirect()
       }
-
-      //FIXME: Response for successful sign up
     }
   }
 
   return (
     <div>
+      {success ? <PickTeams /> : ""}
       <form id="signup-form" onSubmit={(e) => handleSubmit(e)}>
         <h1>Welcome!</h1>
         {errorMsg ? <p className="error-msg">{errorMsg}</p> : ""}

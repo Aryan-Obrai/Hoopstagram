@@ -1,0 +1,13 @@
+#pick-teams {
+    background-color: var(--grey);
+    color: black;
+    display: grid;
+    gap: 2px;
+    grid-template-columns: repeat(5, 1fr);
+    padding: 5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    transform: translate(-50%, -50%);
+}

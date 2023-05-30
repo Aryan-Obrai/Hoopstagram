@@ -54,7 +54,7 @@ app.get("/feed", (req, res) => {
 
 app.get("/games", (req, res) => {});
 
-app.get("/teams+players", (req, res) => {});
+app.get("/teams_players", (req, res) => {});
 
 //POST Methods
 app.post("/post", (req, res) => {});

@@ -32,10 +32,9 @@ async function signup(req, res) {
 
       console.log("Signed up");
 
-      // res.status(201).json({
-      //   success: true,
-      //   redirectURL: "/feed",
-      // });
+      res.status(201).send({
+        success: true,
+      });
     }
   } catch (error) {
     console.error("SIGNUP ERROR: " + error.message);

@@ -7,6 +7,7 @@ import Games from "./pages/Games/Games";
 import TeamsPlayers from "./pages/TeamsPlayers/TeamsPlayers";
 import Signup from "./pages/Signup/Signup";
 import Login from "./pages/Login/Login";
+import PickTeams from "./pages/Signup/PickTeams";
 import { UserContext } from "./contexts/UserContext";
 import { useEffect, useState } from "react";
 
@@ -26,9 +27,10 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/feed" element={<Feed />} />
           <Route path="/games" element={<Games />} />
-          <Route path="/teams+players" element={<TeamsPlayers />} />
+          <Route path="/teams_players" element={<TeamsPlayers />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/pick_teams" element={<PickTeams />} />
         </Routes>
       </UserContext.Provider>
     </div>
