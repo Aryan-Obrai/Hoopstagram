@@ -1,4 +1,4 @@
-//Imports
+//-------------------Imports-------------------//
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
@@ -7,10 +7,11 @@ const session = require("express-session");
 const mongoose = require("mongoose");
 const passport = require("passport");
 const authRoutes = require("./routes/authRoutes");
+//-------------------END Imports-------------------//
 
 app = express();
 
-//Middleware
+//-------------------Middleware-------------------//
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.json());
@@ -35,9 +36,12 @@ app.use(
 require("./auth/passportConfig")(passport);
 app.use(passport.initialize());
 app.use(passport.session());
+//-------------------END Middleware-------------------//
 
+//-------------------Routes-------------------//
 //Authentication routes for signup and login
 app.use("/auth", authRoutes);
+//-------------------END Routes-------------------//
 
 //GET Methods
 app.get("/feed", (req, res) => {
