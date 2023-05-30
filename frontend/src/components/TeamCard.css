@@ -1,19 +1,22 @@
 .team-card {
+    align-items: center;
     background-color: var(--post-bg);
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     height: 100px;
     width: 120px;
 }
 
 .team-card img {
-    max-width: 65px;
     height: auto;
-    margin: 0 auto;
+    margin: 10px auto 0;
 }
 
 .team-card h1 {
     color: rgb(156, 158, 157);
     font-size: 0.75rem;
     text-align: center;
+    height: 10px;
+    margin: 0 auto 25px;
 }

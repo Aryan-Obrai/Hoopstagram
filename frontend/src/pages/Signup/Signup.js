@@ -57,7 +57,7 @@ function Signup() {
 
   return (
     <div>
-      {success ? <PickTeams /> : ""}
+      {<PickTeams />}
       <form id="signup-form" onSubmit={(e) => handleSubmit(e)}>
         <h1>Welcome!</h1>
         {errorMsg ? <p className="error-msg">{errorMsg}</p> : ""}
