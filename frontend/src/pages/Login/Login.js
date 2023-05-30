@@ -32,6 +32,7 @@ function Login() {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
+        credentials: "include",
 
         body: JSON.stringify({
           username: usernameRef.current.value,

@@ -7,11 +7,12 @@ module.exports = function (passport) {
     done(null, user._id);
   });
 
-  passport.deserializeUser((id, done) => {
-    User.findById(id, function (err, user) {
-      console.log(user);
-      done(err, user);
-    });
+  passport.deserializeUser(async (id, done) => {
+    const user = await User.find({ _id: id });
+
+    if (user) {
+      done(null, user);
+    }
   });
 
   passport.use(
@@ -33,11 +34,7 @@ module.exports = function (passport) {
           });
         }
 
-        let userFormatted = user[0];
-        //remove password
-        userFormatted.password = undefined;
-
-        return done(null, userFormatted);
+        return done(null, user[0]);
       } catch (error) {
         console.log("LocalStrategy Error: " + error);
         return done(error, false);

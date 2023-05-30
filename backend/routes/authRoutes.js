@@ -1,6 +1,5 @@
 const express = require("express");
 const { signup } = require("../auth/signup");
-const { login } = require("../auth/loginPassport");
 const passport = require("passport");
 
 const router = express.Router();

@@ -42,7 +42,7 @@ app.use("/auth", authRoutes);
 //GET Methods
 app.get("/feed", (req, res) => {
   if (req.user) {
-    res.send(req.user);
+    res.send({ msg: "LOGGED IN" });
   } else {
     res.send({ msg: "NOT LOGGED IN" });
   }
