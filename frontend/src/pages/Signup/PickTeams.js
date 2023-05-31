@@ -38,9 +38,13 @@ function PickTeams() {
 
   const [selectedTeams, setSelectedTeams] = useState([]);
 
-  useEffect(() => {
-    console.log(selectedTeams);
-  });
+  // useEffect(() => {
+  //
+  // });
+
+  function clickDone() {
+    console.log("Click");
+  }
 
   return (
     <div id="pick-teams-container">
@@ -56,8 +60,10 @@ function PickTeams() {
         ))}
       </div>
       <div id="pick-teams-btns">
-        <button id="skip-btn">Skip</button>
-        <button id="done-btn">Done</button>
+        <button className="skip-btn">Skip</button>
+        <button className="done-btn" onClick={() => clickDone()}>
+          Done
+        </button>
       </div>
     </div>
   );

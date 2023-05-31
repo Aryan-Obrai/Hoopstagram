@@ -38,19 +38,14 @@
     width: 150px;
 }
 
-#skip-btn {
+.skip-btn {
     background-color: var(--post-bg);
     border: 3px solid var(--accent);
     color: var(--accent);
 }
 
-#done-btn {
+.done-btn {
     background-color: var(--accent);
     border: 3px solid var(--post-bg);
     color: var(--post-bg)
-}
-
-#pick-teams-btns button:hover {
-    background-color: var(--hover);
-    color: var(--accent);
 }

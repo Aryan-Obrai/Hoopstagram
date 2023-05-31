@@ -5,6 +5,44 @@ import "./TeamCard.css";
 
 function TeamCard(props) {
   const { team, setTeams, selectedTeams } = props;
+
+  let { imgURL, altText, teamFormatted } = setImgUrl(team);
+
+  let setWidth = setImgWidth(teamFormatted);
+
+  const [selected, setSelected] = useState(true);
+
+  function handleClick() {
+    setSelected((prevSelected) => !prevSelected);
+
+    if (selected === true) {
+      setTeams([...selectedTeams, team]);
+    } else {
+      const removeTeamSelected = selectedTeams.filter(
+        (currentTeam) => currentTeam !== team
+      );
+      setTeams(removeTeamSelected);
+    }
+  }
+
+  return (
+    <button
+      className={selected ? "team-card" : "team-card selected"}
+      onClick={() => handleClick()}
+    >
+      <FontAwesomeIcon
+        icon={faCheck}
+        className={selected ? "check" : "check checked"}
+      />
+      <img src={imgURL} alt={altText} style={setWidth}></img>
+      <h1>{team}</h1>
+    </button>
+  );
+}
+
+//HELPER FUNCTIONS
+
+function setImgUrl(team) {
   const teamName = team.trim().split(" ");
 
   const teamFormatted = teamName[teamName.length - 1].toLowerCase();
@@ -13,8 +51,11 @@ function TeamCard(props) {
 
   const altText = team + " Logo";
 
-  let setWidth = { width: "45px" };
+  return { imgURL, altText, teamFormatted };
+}
 
+function setImgWidth(teamFormatted) {
+  let setWidth = { width: "45px" };
   //width is dependent on size of img
   if (teamFormatted === "cavaliers") {
     setWidth = { width: "100px" };
@@ -33,35 +74,7 @@ function TeamCard(props) {
   ) {
     setWidth = { width: "60px" };
   }
-
-  const [selected, setSelected] = useState(true);
-  const [cardStyle, setCardStyle] = useState("team-card");
-  const [checkStyle, setCheckStyle] = useState("check");
-
-  function handleClick() {
-    setSelected((prevSelected) => !prevSelected);
-
-    if (selected === true) {
-      setTeams([...selectedTeams, team]);
-      setCardStyle("team-card selected");
-      setCheckStyle("check checked");
-    } else {
-      setCardStyle("team-card");
-      setCheckStyle("check");
-      const removeTeamSelected = selectedTeams.filter(
-        (currentTeam) => currentTeam !== team
-      );
-      setTeams(removeTeamSelected);
-    }
-  }
-
-  return (
-    <button className={cardStyle} onClick={() => handleClick()}>
-      <FontAwesomeIcon icon={faCheck} className={checkStyle} />
-      <img src={imgURL} alt={altText} style={setWidth}></img>
-      <h1>{team}</h1>
-    </button>
-  );
+  return setWidth;
 }
 
 export default TeamCard;
