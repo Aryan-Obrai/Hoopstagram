@@ -15,7 +15,7 @@ router.get("/account_info", (req, res) => {
 
     res.status(200).send({ user: formattedUser });
   } else {
-    res.status(404).send({ msg: "No user" });
+    res.sendStatus(204);
   }
 });
 

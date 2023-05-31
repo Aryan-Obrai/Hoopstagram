@@ -16,6 +16,7 @@ function Navbar() {
       },
       credentials: "include",
     });
+
     if (response.status === 200) {
       setUser(null);
     }

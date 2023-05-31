@@ -28,7 +28,7 @@ const isValidRequest = (req, res, next) => {
 router.post("/signup", isValidRequest, (req, res, next) => {
   passport.authenticate("signup", (error, user, info) => {
     if (error) {
-      console.log("SignupPassportAuthenticate Error: " + error);
+      console.log("\nSignupPassportAuthenticate Error: " + error);
       return res.status(500).send("Server error");
     }
 
@@ -42,7 +42,7 @@ router.post("/signup", isValidRequest, (req, res, next) => {
         return next(error);
       }
 
-      console.log("Signed up as " + user.username);
+      console.log("\nSigned up as " + user.username);
       console.log("SESSION STARTED");
 
       let formattedUser = {
@@ -61,7 +61,7 @@ router.post("/signup", isValidRequest, (req, res, next) => {
 router.post("/login", isValidRequest, (req, res, next) => {
   passport.authenticate("login", (error, user, info) => {
     if (error) {
-      console.log("LoginPassportAuthenticate Error: " + error);
+      console.log("\nLoginPassportAuthenticate Error: " + error);
       return res.status(500).send("Server error");
     }
 
@@ -80,7 +80,7 @@ router.post("/login", isValidRequest, (req, res, next) => {
         return next(error);
       }
 
-      console.log("Logged in as " + user.username);
+      console.log("\nLogged in as " + user.username);
       console.log("SESSION STARTED");
 
       let formattedUser = {
@@ -96,7 +96,7 @@ router.post("/login", isValidRequest, (req, res, next) => {
 });
 
 router.post("/logout", function (req, res, next) {
-  console.log("Logging out of " + req.user.username);
+  console.log("\nLogging out of " + req.user[0].username);
 
   req.logout(function (err) {
     if (err) {

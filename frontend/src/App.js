@@ -28,18 +28,23 @@ function App() {
         },
         credentials: "include",
       });
-      const result = await response.json();
-      return result;
+
+      try {
+        const result = await response.json();
+        return result;
+      } catch (error) {
+        //return null if no response available
+        //204 No Content because no user is signed in
+        return null;
+      }
     };
 
     if (!user) {
       fetchData()
         .then((data) => {
           //only set user if an actual user is returned
-          if (data.user) {
+          if (data) {
             setUser(data.user);
-          } else {
-            console.log("404 is expected if no user logged in");
           }
         })
         .catch((error) => console.log(error));
