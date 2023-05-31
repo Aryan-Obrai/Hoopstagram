@@ -49,6 +49,7 @@ router.post("/signup", isValidRequest, (req, res, next) => {
         username: user.username,
         email: user.email,
         _id: user._id,
+        favoriteTeams: user.favoriteTeams,
       };
 
       return res.status(201).send({ user: formattedUser });
@@ -86,6 +87,7 @@ router.post("/login", isValidRequest, (req, res, next) => {
         username: user.username,
         email: user.email,
         _id: user._id,
+        favoriteTeams: user.favoriteTeams,
       };
 
       return res.status(200).send({ user: formattedUser });

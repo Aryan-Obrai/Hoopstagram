@@ -52,6 +52,22 @@ app.get("/feed", (req, res) => {
   }
 });
 
+app.get("/user", (req, res) => {
+  if (req.user) {
+    //dont send password
+    let formattedUser = {
+      username: req.user[0].username,
+      email: req.user[0].email,
+      _id: req.user[0]._id,
+      favoriteTeams: req.user[0].favoriteTeams,
+    };
+
+    res.send({ user: formattedUser });
+  } else {
+    res.send({ msg: "No user" });
+  }
+});
+
 app.get("/games", (req, res) => {});
 
 app.get("/teams_players", (req, res) => {});

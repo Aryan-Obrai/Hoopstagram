@@ -14,8 +14,36 @@ import { useEffect, useState } from "react";
 function App() {
   const [user, setUser] = useState(null);
 
+  //persists user on refresh
+  //looks at user state
+  //if it is null request session user info from server
   useEffect(() => {
-    console.log(user);
+    const fetchData = async () => {
+      const response = await fetch("http://localhost:5000/user", {
+        method: "GET",
+        mode: "cors",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+      console.log("FETCH");
+      const result = await response.json();
+      return result;
+    };
+
+    if (!user) {
+      fetchData()
+        .then((data) => {
+          console.log(data);
+          //only set user if an actual user is returned
+          if (data.user) {
+            setUser(data.user);
+          }
+        })
+        .catch((error) => console.log(error));
+    }
   }, [user]);
 
   return (
