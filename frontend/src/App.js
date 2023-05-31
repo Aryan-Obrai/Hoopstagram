@@ -19,7 +19,7 @@ function App() {
   //if it is null request session user info from server
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("http://localhost:5000/user", {
+      const response = await fetch("http://localhost:5000/user/account_info", {
         method: "GET",
         mode: "cors",
         headers: {
@@ -28,7 +28,6 @@ function App() {
         },
         credentials: "include",
       });
-      console.log("FETCH");
       const result = await response.json();
       return result;
     };
@@ -36,10 +35,11 @@ function App() {
     if (!user) {
       fetchData()
         .then((data) => {
-          console.log(data);
           //only set user if an actual user is returned
           if (data.user) {
             setUser(data.user);
+          } else {
+            console.log("404 is expected if no user logged in");
           }
         })
         .catch((error) => console.log(error));

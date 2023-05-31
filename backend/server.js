@@ -7,6 +7,7 @@ const session = require("express-session");
 const mongoose = require("mongoose");
 const passport = require("passport");
 const authRoutes = require("./routes/authRoutes");
+const userRoutes = require("./routes/userRoutes");
 //-------------------END Imports-------------------//
 
 app = express();
@@ -30,6 +31,7 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+    cookie: { maxAge: 3600000 }, //expires in 1 hour,
   })
 );
 
@@ -41,39 +43,8 @@ app.use(passport.session());
 //-------------------Routes-------------------//
 //Authentication routes for signup and login
 app.use("/auth", authRoutes);
+app.use("/user", userRoutes);
 //-------------------END Routes-------------------//
-
-//GET Methods
-app.get("/feed", (req, res) => {
-  if (req.user) {
-    res.send({ msg: "LOGGED IN" });
-  } else {
-    res.send({ msg: "NOT LOGGED IN" });
-  }
-});
-
-app.get("/user", (req, res) => {
-  if (req.user) {
-    //dont send password
-    let formattedUser = {
-      username: req.user[0].username,
-      email: req.user[0].email,
-      _id: req.user[0]._id,
-      favoriteTeams: req.user[0].favoriteTeams,
-    };
-
-    res.send({ user: formattedUser });
-  } else {
-    res.send({ msg: "No user" });
-  }
-});
-
-app.get("/games", (req, res) => {});
-
-app.get("/teams_players", (req, res) => {});
-
-//POST Methods
-app.post("/post", (req, res) => {});
 
 //host app and then connect to MongoDB
 app.listen(5000, () => {

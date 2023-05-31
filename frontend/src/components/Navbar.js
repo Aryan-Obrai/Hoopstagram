@@ -4,7 +4,22 @@ import { UserContext } from "../contexts/UserContext";
 import { useContext } from "react";
 
 function Navbar() {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
+
+  async function handleLogout() {
+    const response = await fetch("http://localhost:5000/auth/logout", {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    });
+    if (response.status === 200) {
+      setUser(null);
+    }
+  }
 
   return (
     <nav>
@@ -22,14 +37,14 @@ function Navbar() {
           </li>
 
           <li>
-            <Link to="/teams+players">Teams & Players</Link>
+            <Link to="/teams_players">Teams & Players</Link>
           </li>
         </ul>
 
         {user ? (
           <div id="account-btns">
             <Link to="/">
-              <button>Logout</button>
+              <button onClick={() => handleLogout()}>Logout</button>
             </Link>
           </div>
         ) : (

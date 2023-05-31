@@ -95,4 +95,17 @@ router.post("/login", isValidRequest, (req, res, next) => {
   })(req, res, next);
 });
 
+router.post("/logout", function (req, res, next) {
+  console.log("Logging out of " + req.user.username);
+
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+  });
+
+  console.log("SESSION ENDED");
+  res.sendStatus(200);
+});
+
 module.exports = router;

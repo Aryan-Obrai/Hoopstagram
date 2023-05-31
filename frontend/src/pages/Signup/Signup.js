@@ -52,7 +52,7 @@ function Signup() {
       if (responseData.errorMsg) {
         setErrorMsg(responseData.errorMsg);
       }
-      //receives user info and sets context for app
+      //receives user info and sets user context for app
       else if (responseData.user) {
         setSuccess(true);
         setUser(responseData.user);
