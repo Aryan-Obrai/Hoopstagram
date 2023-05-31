@@ -46,7 +46,7 @@
 }
 
 #login-form-btn:hover {
-    background-color: #34375c;
+    background-color: var(--hover);
     color: var(--accent);
 }
 

@@ -1,11 +1,21 @@
 .team-card {
     align-items: center;
     background-color: var(--post-bg);
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    position: relative;
     height: 100px;
     width: 120px;
+    transition: 0.2s ease-in-out;
+}
+
+.team-card:hover {
+    background-color: var(--hover);
+    transform: scale(1.05);
 }
 
 .team-card img {
@@ -17,6 +27,9 @@
     color: rgb(156, 158, 157);
     font-size: 0.75rem;
     text-align: center;
-    height: 10px;
-    margin: 0 auto 25px;
+    margin: 0 auto 10px;
+}
+
+.selected {
+    background-color: var(--hover);
 }

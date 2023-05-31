@@ -1,6 +1,6 @@
 import "./PickTeams.css";
 import TeamCard from "../../components/TeamCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function PickTeams() {
   const teams = [
@@ -38,11 +38,27 @@ function PickTeams() {
 
   const [selectedTeams, setSelectedTeams] = useState([]);
 
+  useEffect(() => {
+    console.log(selectedTeams);
+  });
+
   return (
-    <div id="pick-teams">
-      {teams.map((team) => (
-        <TeamCard team={team} setTeams={setSelectedTeams} />
-      ))}
+    <div id="pick-teams-container">
+      <h1 id="pick-teams-heading">Select your favorite teams</h1>
+      <div id="pick-teams">
+        {teams.map((team) => (
+          <TeamCard
+            key={team}
+            team={team}
+            setTeams={setSelectedTeams}
+            selectedTeams={selectedTeams}
+          />
+        ))}
+      </div>
+      <div id="pick-teams-btns">
+        <button id="skip-btn">Skip</button>
+        <button id="done-btn">Done</button>
+      </div>
     </div>
   );
 }
