@@ -1,5 +1,5 @@
 import "./Signup.css";
-import { Link, redirect } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useRef, useState, useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import PickTeams from "../../components/PickTeams";
@@ -9,6 +9,7 @@ function Signup() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const { setUser } = useContext(UserContext);
+  const navigate = useNavigate();
 
   let [errorMsg, setErrorMsg] = useState("");
   let [success, setSuccess] = useState(false);
@@ -56,6 +57,7 @@ function Signup() {
       else if (responseData.user) {
         setSuccess(true);
         setUser(responseData.user);
+        navigate("/feed");
       }
     }
   }

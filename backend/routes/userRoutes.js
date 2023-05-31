@@ -15,6 +15,7 @@ router.get("/account_info", (req, res) => {
 
     res.status(200).send({ user: formattedUser });
   } else {
+    //no user logged in
     res.sendStatus(204);
   }
 });

@@ -1,5 +1,5 @@
 import "./Login.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useRef } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { useContext, useState } from "react";
@@ -8,6 +8,7 @@ function Login() {
   const usernameRef = useRef();
   const passwordRef = useRef();
   const { setUser } = useContext(UserContext);
+  const navigate = useNavigate();
 
   let [errorMsg, setErrorMsg] = useState("");
 
@@ -48,6 +49,7 @@ function Login() {
       //receives user info and sets user context for app
       else if (responseData.user) {
         setUser(responseData.user);
+        navigate("/feed");
       }
     }
   }
