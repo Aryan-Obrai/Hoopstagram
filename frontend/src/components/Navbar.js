@@ -1,26 +1,11 @@
 import "./Navbar.css";
 import { Link } from "react-router-dom";
-import { UserContext } from "../contexts/UserContext";
 import { useContext } from "react";
+import { UserContext } from "../contexts/UserContext";
+import UserMenu from "../components/UserMenu";
 
 function Navbar() {
   const { user, setUser } = useContext(UserContext);
-
-  async function handleLogout() {
-    const response = await fetch("http://localhost:5000/auth/logout", {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-    });
-
-    if (response.status === 200) {
-      setUser(null);
-    }
-  }
 
   return (
     <nav>
@@ -43,11 +28,7 @@ function Navbar() {
         </ul>
 
         {user ? (
-          <div id="account-btns">
-            <Link to="/">
-              <button onClick={() => handleLogout()}>Logout</button>
-            </Link>
-          </div>
+          <UserMenu />
         ) : (
           <div id="account-btns">
             <Link to="/signup">

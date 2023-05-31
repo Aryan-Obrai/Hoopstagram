@@ -7,13 +7,17 @@
     top: 55%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 20px;
+    padding: 10px 20px;
     z-index: 1;
 }
 
 #pick-teams-heading {
-    color: black;
+    background-color: var(--navbar);
+    border-radius: 1rem;
+    color: var(--accent);
+    font-style: italic;
     margin: 0 auto 20px;
+    padding: 5px 20px;
 }
 
 #pick-teams {

@@ -8,11 +8,16 @@ function Signup() {
   const usernameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
-  const { setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   let [errorMsg, setErrorMsg] = useState("");
   let [success, setSuccess] = useState(false);
+
+  //if already logged in, redirect to feed
+  if (user && !success) {
+    navigate("/feed");
+  }
 
   function validSubmission() {
     //submission must be not empty
@@ -57,14 +62,13 @@ function Signup() {
       else if (responseData.user) {
         setSuccess(true);
         setUser(responseData.user);
-        navigate("/feed");
       }
     }
   }
 
   return (
     <div>
-      {/* {<PickTeams />} */}
+      {success ? <PickTeams /> : ""}
       <form id="signup-form" onSubmit={(e) => handleSubmit(e)}>
         <h1>Welcome!</h1>
         {errorMsg ? <p className="error-msg">{errorMsg}</p> : ""}
