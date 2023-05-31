@@ -14,9 +14,9 @@ import { useEffect, useState } from "react";
 function App() {
   const [user, setUser] = useState(null);
 
-  // useEffect(() => {
-  //   console.log(user);
-  // });
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
 
   return (
     <div>

@@ -1,12 +1,14 @@
 import "./Signup.css";
 import { Link, redirect } from "react-router-dom";
-import { useRef, useState } from "react";
+import { useRef, useState, useContext } from "react";
+import { UserContext } from "../../contexts/UserContext";
 import PickTeams from "../../components/PickTeams";
 
 function Signup() {
   const usernameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
+  const { setUser } = useContext(UserContext);
 
   let [errorMsg, setErrorMsg] = useState("");
   let [success, setSuccess] = useState(false);
@@ -43,14 +45,17 @@ function Signup() {
           password: passwordRef.current.value,
         }),
       });
-      //expected: errorMessage if not succesful
+
       const responseData = await response.json();
 
+      //error
       if (responseData.errorMsg) {
         setErrorMsg(responseData.errorMsg);
-      } else if (responseData.success) {
+      }
+      //receives user info and sets context for app
+      else if (responseData.user) {
         setSuccess(true);
-        //redirect()
+        setUser(responseData.user);
       }
     }
   }

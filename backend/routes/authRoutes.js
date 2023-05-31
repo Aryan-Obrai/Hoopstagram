@@ -24,6 +24,7 @@ const isValidRequest = (req, res, next) => {
 //signup and login use Passport.js Middleware to authenticate
 //located in auth/passportConfig.js
 
+//session is created on signup so user doesn't have to re login
 router.post("/signup", isValidRequest, (req, res, next) => {
   passport.authenticate("signup", (error, user, info) => {
     if (error) {
@@ -41,14 +42,21 @@ router.post("/signup", isValidRequest, (req, res, next) => {
         return next(error);
       }
 
-      console.log("Signed up as " + req.body.username);
+      console.log("Signed up as " + user.username);
       console.log("SESSION STARTED");
 
-      return res.status(200).send({ errorMsg: "Success" });
+      let formattedUser = {
+        username: user.username,
+        email: user.email,
+        _id: user._id,
+      };
+
+      return res.status(201).send({ user: formattedUser });
     });
   })(req, res, next);
 });
 
+//session is created on login
 router.post("/login", isValidRequest, (req, res, next) => {
   passport.authenticate("login", (error, user, info) => {
     if (error) {
@@ -71,10 +79,16 @@ router.post("/login", isValidRequest, (req, res, next) => {
         return next(error);
       }
 
-      console.log("Logged in as " + req.body.username);
+      console.log("Logged in as " + user.username);
       console.log("SESSION STARTED");
 
-      return res.status(200).send({ errorMsg: "Success" });
+      let formattedUser = {
+        username: user.username,
+        email: user.email,
+        _id: user._id,
+      };
+
+      return res.status(200).send({ user: formattedUser });
     });
   })(req, res, next);
 });

@@ -39,15 +39,15 @@ function Login() {
           password: passwordRef.current.value,
         }),
       });
-      //expected: status code and redirect URL if success, errorMessage if not
       const responseData = await response.json();
 
-      //no existing email or wrong password
+      //error
       if (responseData.errorMsg) {
         setErrorMsg(responseData.errorMsg);
-      } else {
+      }
+      //receives user info and sets context for app
+      else if (responseData.user) {
         setUser(responseData.user);
-        console.log(responseData);
       }
     }
   }
