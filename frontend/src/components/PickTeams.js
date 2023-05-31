@@ -1,5 +1,5 @@
 import "./PickTeams.css";
-import TeamCard from "../../components/TeamCard";
+import TeamCard from "./TeamCard";
 import { useEffect, useState } from "react";
 
 function PickTeams() {

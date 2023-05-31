@@ -7,7 +7,7 @@ import Games from "./pages/Games/Games";
 import TeamsPlayers from "./pages/TeamsPlayers/TeamsPlayers";
 import Signup from "./pages/Signup/Signup";
 import Login from "./pages/Login/Login";
-import PickTeams from "./pages/Signup/PickTeams";
+import PickTeams from "./components/PickTeams";
 import { UserContext } from "./contexts/UserContext";
 import { useEffect, useState } from "react";
 

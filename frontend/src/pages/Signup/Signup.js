@@ -1,7 +1,7 @@
 import "./Signup.css";
 import { Link, redirect } from "react-router-dom";
 import { useRef, useState } from "react";
-import PickTeams from "./PickTeams";
+import PickTeams from "../../components/PickTeams";
 
 function Signup() {
   const usernameRef = useRef();
@@ -57,7 +57,7 @@ function Signup() {
 
   return (
     <div>
-      {<PickTeams />}
+      {/* {<PickTeams />} */}
       <form id="signup-form" onSubmit={(e) => handleSubmit(e)}>
         <h1>Welcome!</h1>
         {errorMsg ? <p className="error-msg">{errorMsg}</p> : ""}
