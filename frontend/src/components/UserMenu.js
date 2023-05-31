@@ -38,7 +38,6 @@ function UserMenu() {
           <li>
             <Link to="">
               <button>
-                {" "}
                 <FontAwesomeIcon icon={faUser} />
                 View Profile
               </button>
@@ -47,7 +46,6 @@ function UserMenu() {
           <li>
             <Link to="">
               <button>
-                {" "}
                 <FontAwesomeIcon icon={faGear} />
                 Profile Settings
               </button>
@@ -56,7 +54,6 @@ function UserMenu() {
           <li>
             <Link to="/">
               <button onClick={() => handleLogout()}>
-                {" "}
                 <FontAwesomeIcon icon={faRightFromBracket} />
                 Logout
               </button>
