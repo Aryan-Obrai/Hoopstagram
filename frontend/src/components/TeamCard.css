@@ -24,7 +24,7 @@
 }
 
 .team-card h1 {
-    color: rgb(156, 158, 157);
+    color: rgb(187, 187, 187);
     font-size: 0.75rem;
     text-align: center;
     margin: 0 auto 10px;
@@ -32,4 +32,16 @@
 
 .selected {
     background-color: var(--hover);
+}
+
+.check {
+    color: var(--accent);
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    visibility: hidden;
+}
+
+.checked {
+    visibility: visible;
 }

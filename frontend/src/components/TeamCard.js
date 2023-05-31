@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import "./TeamCard.css";
 
 function TeamCard(props) {
@@ -34,6 +36,7 @@ function TeamCard(props) {
 
   const [selected, setSelected] = useState(true);
   const [cardStyle, setCardStyle] = useState("team-card");
+  const [checkStyle, setCheckStyle] = useState("check");
 
   function handleClick() {
     setSelected((prevSelected) => !prevSelected);
@@ -41,8 +44,10 @@ function TeamCard(props) {
     if (selected === true) {
       setTeams([...selectedTeams, team]);
       setCardStyle("team-card selected");
+      setCheckStyle("check checked");
     } else {
       setCardStyle("team-card");
+      setCheckStyle("check");
       const removeTeamSelected = selectedTeams.filter(
         (currentTeam) => currentTeam !== team
       );
@@ -52,6 +57,7 @@ function TeamCard(props) {
 
   return (
     <button className={cardStyle} onClick={() => handleClick()}>
+      <FontAwesomeIcon icon={faCheck} className={checkStyle} />
       <img src={imgURL} alt={altText} style={setWidth}></img>
       <h1>{team}</h1>
     </button>
