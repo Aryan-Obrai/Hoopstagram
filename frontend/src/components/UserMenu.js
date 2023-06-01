@@ -14,11 +14,7 @@ function useOutsideUserMenu(ref, setShowMenu) {
   useEffect(() => {
     function handleClickOutside(event) {
       if (ref.current && !ref.current.contains(event.target)) {
-        if (
-          event.target.id !== "user-menu-btn" &&
-          event.target.id !== "profile-pic"
-        )
-          setShowMenu(false);
+        setShowMenu(false);
       }
     }
 
@@ -26,7 +22,7 @@ function useOutsideUserMenu(ref, setShowMenu) {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [ref]);
+  }, [ref, setShowMenu]);
 }
 
 function UserMenu() {
@@ -51,13 +47,9 @@ function UserMenu() {
     }
   }
 
-  function handleClick() {
-    setShowMenu(!showMenu);
-  }
-
   return (
-    <div id="user-menu-container">
-      <button id="user-menu-btn" onClick={() => handleClick()}>
+    <div ref={wrapperRef} id="user-menu-container">
+      <button id="user-menu-btn" onClick={() => setShowMenu(!showMenu)}>
         <img
           id="profile-pic"
           src="/default.png"
@@ -66,7 +58,7 @@ function UserMenu() {
         ></img>
       </button>
       {showMenu && (
-        <ul ref={wrapperRef} id="user-menu">
+        <ul id="user-menu">
           <li>
             <Link to="" onClick={() => setShowMenu(false)}>
               <button>
