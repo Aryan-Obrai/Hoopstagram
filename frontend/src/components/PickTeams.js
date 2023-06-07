@@ -41,10 +41,16 @@ function PickTeams(props) {
 
   const [selectedTeams, setSelectedTeams] = useState([]);
 
-  //FIXME: issue with getting selected teams to style on load
+  //show this component only when doneLoadinng is true
+  const [doneLoading, setDoneLoading] = useState(false);
+
+  //loads favorite teams if logged in
   useEffect(() => {
     if (!initial) {
       setSelectedTeams(favoriteTeams);
+      setDoneLoading(true);
+    } else {
+      setDoneLoading(true);
     }
   }, []);
 
@@ -75,29 +81,33 @@ function PickTeams(props) {
   }
 
   return (
-    <div id="pick-teams-container">
-      <h1 id="pick-teams-heading">Select your favorite teams</h1>
+    <div>
+      {doneLoading && (
+        <div id="pick-teams-container">
+          <h1 id="pick-teams-heading">Select your favorite teams</h1>
 
-      <div id="pick-teams">
-        {teams.map((team) => (
-          <TeamCard
-            initial={initial}
-            key={team}
-            team={team}
-            setTeams={setSelectedTeams}
-            selectedTeams={selectedTeams}
-          />
-        ))}
-      </div>
+          <div id="pick-teams">
+            {teams.map((team) => (
+              <TeamCard
+                initial={initial}
+                key={team}
+                team={team}
+                setTeams={setSelectedTeams}
+                selectedTeams={selectedTeams}
+              />
+            ))}
+          </div>
 
-      <div id="pick-teams-btns">
-        <button className="skip-btn" onClick={() => skip()}>
-          {buttonText}
-        </button>
-        <button className="done-btn" onClick={() => done()}>
-          Done
-        </button>
-      </div>
+          <div id="pick-teams-btns">
+            <button className="skip-btn" onClick={() => skip()}>
+              {buttonText}
+            </button>
+            <button className="done-btn" onClick={() => done()}>
+              Done
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
