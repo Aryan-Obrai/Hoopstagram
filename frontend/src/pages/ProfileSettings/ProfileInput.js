@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./ProfileInput.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faCheck } from "@fortawesome/free-solid-svg-icons";
@@ -14,6 +14,11 @@ function ProfileInput(props) {
     setEditMode(!editMode);
   }
 
+  let placeholder;
+  if (type === "password") {
+    placeholder = "Set new password";
+  }
+
   return (
     <div className="profile-input">
       <label htmlFor={type}>{label}</label>
@@ -25,6 +30,7 @@ function ProfileInput(props) {
           value={state}
           onChange={(e) => setter(e.target.value)}
           disabled={!editMode}
+          placeholder={placeholder}
         />
         <button onClick={(e) => toggleEdit(e)} className="profile-input-btn">
           {editMode ? (

@@ -34,11 +34,10 @@ function ProfileSettings() {
     }
   }
 
-  //useEffect(() => console.log(username + " " + email + " " + password));
-
   return (
     <form id="profile-settings-form">
       <h1>Profile Settings</h1>
+
       {fields.map((field) => (
         <ProfileInput
           key={field}
@@ -47,6 +46,12 @@ function ProfileSettings() {
           setter={correspondingSetter(field)}
         />
       ))}
+
+      <div>
+        <p id="fav-teams-label">Favorite Teams</p>
+      </div>
+
+      <button id="update-btn">Update Info 💫</button>
     </form>
   );
 }
