@@ -37,12 +37,15 @@ function PickTeams(props) {
   ];
 
   //lets parent component know user is done picking teams
-  const { username, favoriteTeams, doneSelecting, initial, buttonText } = props;
+  const { username, doneSelecting, initial, buttonText } = props;
 
   const [selectedTeams, setSelectedTeams] = useState([]);
 
   //show this component only when doneLoadinng is true
   const [doneLoading, setDoneLoading] = useState(false);
+
+  //done button is only enabled when user actually has teams picked
+  const [enableDoneButton, setEnableDoneButton] = useState(false);
 
   //loads favorite teams if logged in
   useEffect(() => {
@@ -66,7 +69,21 @@ function PickTeams(props) {
     }
   }, []);
 
+  //enable done button if selectedTeams is not empty
+  useEffect(() => {
+    if (selectedTeams.length > 0) {
+      setEnableDoneButton(true);
+    } else {
+      setEnableDoneButton(false);
+    }
+  }, [selectedTeams]);
+
   async function done() {
+    //user did not pick anything, just skip
+    if (!selectedTeams) {
+      doneSelecting(true);
+    }
+
     const response = await fetch("http://localhost:5000/user/pick_teams", {
       method: "PUT",
       mode: "cors",
@@ -114,7 +131,11 @@ function PickTeams(props) {
             <button className="skip-btn" onClick={() => skip()}>
               {buttonText}
             </button>
-            <button className="done-btn" onClick={() => done()}>
+            <button
+              disabled={!enableDoneButton}
+              className="done-btn"
+              onClick={() => done()}
+            >
               Done
             </button>
           </div>

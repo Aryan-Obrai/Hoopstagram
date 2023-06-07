@@ -23,7 +23,6 @@ function TeamCard(props) {
 
   function handleClick() {
     setSelected((prevSelected) => !prevSelected);
-    console.log(selectedTeams);
 
     if (selected === true) {
       setTeams([...selectedTeams, team]);

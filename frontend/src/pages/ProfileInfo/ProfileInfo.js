@@ -58,7 +58,6 @@ function ProfileInfo() {
           doneSelecting={setDonePickingTeams}
           initial={false}
           username={user.username}
-          favoriteTeams={user.favoriteTeams}
           buttonText={"Cancel"}
         />
       ) : (
