@@ -8,6 +8,8 @@ import TeamsPlayers from "./pages/TeamsPlayers/TeamsPlayers";
 import Signup from "./pages/Signup/Signup";
 import Login from "./pages/Login/Login";
 import PickTeams from "./components/PickTeams";
+import Profile from "./pages/Profile/Profile";
+import ProfileSettings from "./pages/ProfileSettings/ProfileSettings";
 import { UserContext } from "./contexts/UserContext";
 import { useEffect, useState } from "react";
 
@@ -57,12 +59,17 @@ function App() {
         <Navbar />
 
         <Routes>
+          {/* Main Pages */}
           <Route path="/" element={<Home />} />
           <Route path="/feed" element={<Feed />} />
           <Route path="/games" element={<Games />} />
           <Route path="/teams_players" element={<TeamsPlayers />} />
+          {/* Auth Pages */}
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
+          {/* Profile Settings Pages */}
+          <Route path="/profile_settings" element={<ProfileSettings />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/pick_teams" element={<PickTeams />} />
         </Routes>
       </UserContext.Provider>

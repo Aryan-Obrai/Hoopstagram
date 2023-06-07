@@ -1,0 +1,36 @@
+.profile-input {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-and-btn {
+    align-items: center;
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.input-and-btn input {
+    border: none;
+    box-sizing: border-box;
+    flex-grow: 1;
+    height: 30px;
+    margin: 0;
+    padding-left: 10px;
+}
+
+.input-and-btn button {
+    border: none;
+    border-left: 4px solid var(--accent);
+    cursor: pointer;
+    height: 30px;
+    padding: 0 10px;
+}
+
+.profile-input label {
+    margin: 8px 0 10px;
+}
+
+
+.profile-input input:focus {
+    outline: none;
+}

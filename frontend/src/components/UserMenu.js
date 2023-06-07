@@ -60,7 +60,7 @@ function UserMenu() {
       {showMenu && (
         <ul id="user-menu">
           <li>
-            <Link to="" onClick={() => setShowMenu(false)}>
+            <Link to="/profile" onClick={() => setShowMenu(false)}>
               <button>
                 <FontAwesomeIcon icon={faUser} />
                 View Profile
@@ -68,7 +68,7 @@ function UserMenu() {
             </Link>
           </li>
           <li>
-            <Link to="" onClick={() => setShowMenu(false)}>
+            <Link to="/profile_settings" onClick={() => setShowMenu(false)}>
               <button>
                 <FontAwesomeIcon icon={faGear} />
                 Profile Settings
