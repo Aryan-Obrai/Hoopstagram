@@ -6,8 +6,8 @@ import ProfileInput from "./ProfileInput";
 function ProfileSettings() {
   const { user } = useContext(UserContext);
 
-  const [username, setUsername] = useState("user.username");
-  const [email, setEmail] = useState("user.email");
+  const [username, setUsername] = useState(user.username);
+  const [email, setEmail] = useState(user.email);
   const [password, setPassword] = useState("");
 
   const fields = ["username", "email", "password"];
@@ -34,7 +34,7 @@ function ProfileSettings() {
     }
   }
 
-  useEffect(() => console.log(username + " " + email + " " + password));
+  //useEffect(() => console.log(username + " " + email + " " + password));
 
   return (
     <form id="profile-settings-form">

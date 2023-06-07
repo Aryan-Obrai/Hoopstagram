@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./ProfileInput.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import { faPenToSquare, faCheck } from "@fortawesome/free-solid-svg-icons";
 
 function ProfileInput(props) {
   const { type, setter, state } = props;
@@ -11,7 +11,7 @@ function ProfileInput(props) {
 
   function toggleEdit(e) {
     e.preventDefault();
-    setter(type);
+    setEditMode(!editMode);
   }
 
   return (
@@ -24,9 +24,14 @@ function ProfileInput(props) {
           name={type}
           value={state}
           onChange={(e) => setter(e.target.value)}
+          disabled={!editMode}
         />
         <button onClick={(e) => toggleEdit(e)} className="profile-input-btn">
-          <FontAwesomeIcon icon={faPenToSquare} className="fa-xl" />
+          {editMode ? (
+            <FontAwesomeIcon icon={faCheck} className="fa-xl" />
+          ) : (
+            <FontAwesomeIcon icon={faPenToSquare} className="fa-xl" />
+          )}
         </button>
       </div>
     </div>
