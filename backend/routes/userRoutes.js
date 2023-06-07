@@ -29,6 +29,17 @@ router.get("/feed", (req, res) => {
   }
 });
 
+router.get("/favorite_teams", async (req, res) => {
+  if (req.user) {
+    const user = await User.find({ username: req.user[0].username });
+
+    res.status(200).send({ teams: user[0].favoriteTeams });
+  } else {
+    //no user logged in
+    res.sendStatus(204);
+  }
+});
+
 router.get("/games", (req, res) => {});
 
 router.get("/teams_players", (req, res) => {});

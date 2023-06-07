@@ -15,7 +15,6 @@ function TeamCard(props) {
   //FIXME: issue with getting selected teams to style on load
   useEffect(() => {
     if (!initial) {
-      console.log("hi");
       if (selectedTeams.includes(team)) {
         setSelected(false);
       }

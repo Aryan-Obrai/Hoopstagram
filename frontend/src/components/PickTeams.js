@@ -47,8 +47,20 @@ function PickTeams(props) {
   //loads favorite teams if logged in
   useEffect(() => {
     if (!initial) {
-      setSelectedTeams(favoriteTeams);
-      setDoneLoading(true);
+      fetch("http://localhost:5000/user/favorite_teams", {
+        method: "GET",
+        mode: "cors",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setSelectedTeams(data.teams);
+          setDoneLoading(true);
+        });
     } else {
       setDoneLoading(true);
     }
