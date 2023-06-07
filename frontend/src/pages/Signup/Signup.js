@@ -80,7 +80,6 @@ function Signup() {
         <PickTeams
           doneSelecting={setDonePickingTeams}
           initial={true}
-          username={tempUserData.username}
           buttonText={"Skip"}
         />
       ) : (

@@ -37,7 +37,7 @@ function PickTeams(props) {
   ];
 
   //lets parent component know user is done picking teams
-  const { username, doneSelecting, initial, buttonText } = props;
+  const { doneSelecting, initial, buttonText } = props;
 
   const [selectedTeams, setSelectedTeams] = useState([]);
 
@@ -48,6 +48,7 @@ function PickTeams(props) {
   const [enableDoneButton, setEnableDoneButton] = useState(false);
 
   //loads favorite teams if logged in
+  //only triggers on initial load
   useEffect(() => {
     if (!initial) {
       fetch("http://localhost:5000/user/favorite_teams", {
@@ -69,7 +70,7 @@ function PickTeams(props) {
     }
   }, []);
 
-  //enable done button if selectedTeams is not empty
+  //enable/disable done button if selectedTeams is not empty
   useEffect(() => {
     if (selectedTeams.length > 0) {
       setEnableDoneButton(true);
@@ -94,7 +95,6 @@ function PickTeams(props) {
       credentials: "include",
       body: JSON.stringify({
         teams: selectedTeams,
-        username: username,
       }),
     });
 

@@ -47,14 +47,20 @@ router.get("/teams_players", (req, res) => {});
 //POST Methods
 
 //PUT Methods
-router.put("/pick_teams", async (req, res) => {
-  const update = await User.findOneAndUpdate(
-    { username: req.body.username },
-    { favoriteTeams: req.body.teams },
-    { new: true }
-  );
+router.put("/update_info", async (req, res) => {});
 
-  res.status(200).send({ status: true });
+router.put("/pick_teams", async (req, res) => {
+  if (req.user) {
+    const update = await User.findOneAndUpdate(
+      { username: req.user[0].username },
+      { favoriteTeams: req.body.teams },
+      { new: true }
+    );
+
+    res.status(200).send({ status: true });
+  } else {
+    res.sendStatus(404);
+  }
 });
 
 module.exports = router;

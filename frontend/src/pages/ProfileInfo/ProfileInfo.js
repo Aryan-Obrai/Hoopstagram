@@ -45,11 +45,32 @@ function ProfileInfo() {
     setShowPickTeams(true);
   }
 
+  //listens for donePickingTeams
+  //if it is true remove this component from screen
   useEffect(() => {
     if (donePickingTeams) {
       setShowPickTeams(false);
     }
   }, [donePickingTeams]);
+
+  async function updateInfo(e) {
+    e.preventDefault();
+    let updatedInfo = {};
+
+    if (username !== user.username) {
+      updatedInfo.updatedUsername = username;
+    }
+
+    if (email !== user.email) {
+      updatedInfo.updatedEmail = email;
+    }
+
+    if (password) {
+      updatedInfo.password = password;
+    }
+
+    console.log(updatedInfo);
+  }
 
   return (
     <div>
@@ -80,7 +101,9 @@ function ProfileInfo() {
           <button onClick={(e) => editButton(e)}>Edit</button>
         </div>
 
-        <button id="update-btn">Update Info 💫</button>
+        <button id="update-btn" onClick={(e) => updateInfo(e)}>
+          Update Info 💫
+        </button>
       </form>
     </div>
   );
