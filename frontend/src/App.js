@@ -12,6 +12,8 @@ import Profile from "./pages/Profile/Profile";
 import ProfileSettings from "./pages/ProfileSettings/ProfileSettings";
 import { UserContext } from "./contexts/UserContext";
 import { useEffect, useState } from "react";
+import LoggedInRoute from "./protectedRoutes/LoggedInRoute";
+import LoggedOutRoute from "./protectedRoutes/LoggedOutRoute";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -64,13 +66,52 @@ function App() {
           <Route path="/feed" element={<Feed />} />
           <Route path="/games" element={<Games />} />
           <Route path="/teams_players" element={<TeamsPlayers />} />
+
           {/* Auth Pages */}
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login />} />
+          {/* Must not be logged in to access*/}
+          <Route
+            path="/signup"
+            element={
+              <LoggedOutRoute user={user}>
+                <Signup />
+              </LoggedOutRoute>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <LoggedOutRoute user={user}>
+                <Login />
+              </LoggedOutRoute>
+            }
+          />
+
           {/* Profile Settings Pages */}
-          <Route path="/profile_settings" element={<ProfileSettings />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/pick_teams" element={<PickTeams />} />
+          {/* Must be logged in to access*/}
+          <Route
+            path="/profile_settings"
+            element={
+              <LoggedInRoute user={user}>
+                <ProfileSettings />{" "}
+              </LoggedInRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <LoggedInRoute user={user}>
+                <Profile />
+              </LoggedInRoute>
+            }
+          />
+          <Route
+            path="/pick_teams"
+            element={
+              <LoggedInRoute user={user}>
+                <PickTeams />
+              </LoggedInRoute>
+            }
+          />
         </Routes>
       </UserContext.Provider>
     </div>

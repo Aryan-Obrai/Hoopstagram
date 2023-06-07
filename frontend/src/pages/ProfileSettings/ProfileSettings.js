@@ -1,10 +1,13 @@
 import "./ProfileSettings.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { UserContext } from "../../contexts/UserContext";
 import ProfileInput from "./ProfileInput";
 
 function ProfileSettings() {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
+  const { user } = useContext(UserContext);
+
+  const [username, setUsername] = useState("user.username");
+  const [email, setEmail] = useState("user.email");
   const [password, setPassword] = useState("");
 
   const fields = ["username", "email", "password"];

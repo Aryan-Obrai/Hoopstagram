@@ -7,15 +7,10 @@ import { useContext, useState } from "react";
 function Login() {
   const usernameRef = useRef();
   const passwordRef = useRef();
-  const { user, setUser } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   let [errorMsg, setErrorMsg] = useState("");
-
-  //if already logged in, redirect to feed
-  if (user) {
-    navigate("/feed");
-  }
 
   function validSubmission() {
     //submission must be not empty
