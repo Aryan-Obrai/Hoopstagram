@@ -1,4 +1,5 @@
 const express = require("express");
+const User = require("../schemas/Users");
 
 const router = express.Router();
 
@@ -33,6 +34,17 @@ router.get("/games", (req, res) => {});
 router.get("/teams_players", (req, res) => {});
 
 //POST Methods
-router.post("/post", (req, res) => {});
+
+//PUT Methods
+router.put("/pick_teams", async (req, res) => {
+  const update = await User.findOneAndUpdate(
+    { username: req.body.username },
+    { favoriteTeams: req.body.teams },
+    { new: true }
+  );
+
+  console.log(update);
+  res.send({ msg: "RECEIVED" });
+});
 
 module.exports = router;

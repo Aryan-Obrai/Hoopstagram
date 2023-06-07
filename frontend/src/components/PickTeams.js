@@ -2,7 +2,7 @@ import "./PickTeams.css";
 import TeamCard from "./TeamCard";
 import { useEffect, useState } from "react";
 
-function PickTeams() {
+function PickTeams(props) {
   const teams = [
     "Atlanta Hawks ",
     "Boston Celtics ",
@@ -36,14 +36,43 @@ function PickTeams() {
     "Washington Wizards",
   ];
 
+  //lets parent component know user is done picking teams
+  const { username, doneSelecting, initial } = props;
+
   const [selectedTeams, setSelectedTeams] = useState([]);
 
   // useEffect(() => {
   //
   // });
 
-  function clickDone() {
-    console.log("Click");
+  //if not new user, retrieve favorite teams
+  //apply selected style to favorited teams
+  if (!initial) {
+    console.log("not new user");
+  }
+
+  async function done() {
+    const response = await fetch("http://localhost:5000/user/pick_teams", {
+      method: "PUT",
+      mode: "cors",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({
+        teams: selectedTeams,
+        username: username,
+      }),
+    });
+
+    const responseData = await response.json();
+    console.log(responseData);
+  }
+
+  function skip() {
+    console.log("skip");
+    doneSelecting(true);
   }
 
   return (
@@ -60,8 +89,10 @@ function PickTeams() {
         ))}
       </div>
       <div id="pick-teams-btns">
-        <button className="skip-btn">Skip</button>
-        <button className="done-btn" onClick={() => clickDone()}>
+        <button className="skip-btn" onClick={() => skip()}>
+          Skip
+        </button>
+        <button className="done-btn" onClick={() => done()}>
           Done
         </button>
       </div>

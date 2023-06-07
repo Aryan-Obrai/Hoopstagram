@@ -1,6 +1,6 @@
 import "./Signup.css";
 import { Link } from "react-router-dom";
-import { useRef, useState, useContext } from "react";
+import { useRef, useState, useContext, useEffect } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import PickTeams from "../../components/PickTeams";
 
@@ -8,11 +8,16 @@ function Signup() {
   const usernameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
-  const { user, setUser } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
 
-  let [errorMsg, setErrorMsg] = useState("");
-  //success state used to show PickTeams on successful signup
-  let [success, setSuccess] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+
+  //bool state used to show PickTeams on successful signup
+  const [showPickTeams, setShowPickTeams] = useState(false);
+
+  const [donePickingTeams, setDonePickingTeams] = useState(false);
+
+  const [tempUserData, setTempUserData] = useState();
 
   function validSubmission() {
     //submission must be not empty
@@ -55,15 +60,31 @@ function Signup() {
       }
       //receives user info and sets user context for app
       else if (responseData.user) {
-        setSuccess(true);
-        setUser(responseData.user);
+        setShowPickTeams(true);
+        //store temp user data until done picking teams
+        setTempUserData(responseData.user);
       }
     }
   }
 
+  //when done picking teams, set the global context user
+  useEffect(() => {
+    if (donePickingTeams) {
+      setUser(tempUserData);
+    }
+  }, [donePickingTeams, tempUserData, setUser]);
+
   return (
     <div>
-      {success ? <PickTeams /> : ""}
+      {showPickTeams ? (
+        <PickTeams
+          doneSelecting={setDonePickingTeams}
+          initial={true}
+          username={tempUserData.username}
+        />
+      ) : (
+        ""
+      )}
       <form id="signup-form" onSubmit={(e) => handleSubmit(e)}>
         <h1>Welcome!</h1>
         {errorMsg ? <p className="error-msg">{errorMsg}</p> : ""}
