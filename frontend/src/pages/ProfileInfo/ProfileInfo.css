@@ -1,4 +1,4 @@
-#profile-settings-form {
+#profile-info-form {
     background-color: var(--post-bg);
     border-radius: 1rem;
     color: white;
@@ -9,14 +9,14 @@
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 50px;
-    width: 350px;
+    width: 300px;
 }
 
-#profile-settings-form h1 {
+#profile-info-form h1 {
     position: relative;
 }
 
-#profile-settings-form h1::after {
+#profile-info-form h1::after {
     background: white;
     position: absolute;
     content: '';
@@ -46,6 +46,26 @@
     color: var(--accent);
 }
 
-#fav-teams-label {
+#fav-teams-container {
+    align-items: baseline;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
     margin: 8px 0 10px;
+}
+
+#fav-teams-container p {
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+}
+
+#fav-teams-container button {
+    background: none;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 0 15px;
 }

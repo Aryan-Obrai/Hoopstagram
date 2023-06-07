@@ -43,8 +43,7 @@ router.put("/pick_teams", async (req, res) => {
     { new: true }
   );
 
-  console.log(update);
-  res.send({ msg: "RECEIVED" });
+  res.status(200).send({ status: true });
 });
 
 module.exports = router;

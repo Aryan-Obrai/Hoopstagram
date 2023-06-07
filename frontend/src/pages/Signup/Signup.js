@@ -81,6 +81,7 @@ function Signup() {
           doneSelecting={setDonePickingTeams}
           initial={true}
           username={tempUserData.username}
+          buttonText={"Skip"}
         />
       ) : (
         ""

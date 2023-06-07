@@ -37,19 +37,16 @@ function PickTeams(props) {
   ];
 
   //lets parent component know user is done picking teams
-  const { username, doneSelecting, initial } = props;
+  const { username, favoriteTeams, doneSelecting, initial, buttonText } = props;
 
   const [selectedTeams, setSelectedTeams] = useState([]);
 
-  // useEffect(() => {
-  //
-  // });
-
-  //if not new user, retrieve favorite teams
-  //apply selected style to favorited teams
-  if (!initial) {
-    console.log("not new user");
-  }
+  //FIXME: issue with getting selected teams to style on load
+  useEffect(() => {
+    if (!initial) {
+      setSelectedTeams(favoriteTeams);
+    }
+  }, []);
 
   async function done() {
     const response = await fetch("http://localhost:5000/user/pick_teams", {
@@ -67,20 +64,24 @@ function PickTeams(props) {
     });
 
     const responseData = await response.json();
-    console.log(responseData);
+
+    if (responseData.status === true) {
+      doneSelecting(true);
+    }
   }
 
   function skip() {
-    console.log("skip");
     doneSelecting(true);
   }
 
   return (
     <div id="pick-teams-container">
       <h1 id="pick-teams-heading">Select your favorite teams</h1>
+
       <div id="pick-teams">
         {teams.map((team) => (
           <TeamCard
+            initial={initial}
             key={team}
             team={team}
             setTeams={setSelectedTeams}
@@ -88,9 +89,10 @@ function PickTeams(props) {
           />
         ))}
       </div>
+
       <div id="pick-teams-btns">
         <button className="skip-btn" onClick={() => skip()}>
-          Skip
+          {buttonText}
         </button>
         <button className="done-btn" onClick={() => done()}>
           Done

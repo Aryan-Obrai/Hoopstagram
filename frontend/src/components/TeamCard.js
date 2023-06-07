@@ -4,7 +4,7 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import "./TeamCard.css";
 
 function TeamCard(props) {
-  const { team, setTeams, selectedTeams } = props;
+  const { team, setTeams, selectedTeams, initial } = props;
 
   let { imgURL, altText, teamFormatted } = setImgUrl(team);
 
@@ -12,8 +12,19 @@ function TeamCard(props) {
 
   const [selected, setSelected] = useState(true);
 
+  //FIXME: issue with getting selected teams to style on load
+  useEffect(() => {
+    if (!initial) {
+      console.log("hi");
+      if (selectedTeams.includes(team)) {
+        setSelected(false);
+      }
+    }
+  }, []);
+
   function handleClick() {
     setSelected((prevSelected) => !prevSelected);
+    console.log(selectedTeams);
 
     if (selected === true) {
       setTeams([...selectedTeams, team]);

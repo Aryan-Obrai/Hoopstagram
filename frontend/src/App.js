@@ -9,7 +9,7 @@ import Signup from "./pages/Signup/Signup";
 import Login from "./pages/Login/Login";
 import PickTeams from "./components/PickTeams";
 import Profile from "./pages/Profile/Profile";
-import ProfileSettings from "./pages/ProfileSettings/ProfileSettings";
+import ProfileInfo from "./pages/ProfileInfo/ProfileInfo";
 import { UserContext } from "./contexts/UserContext";
 import { useEffect, useState } from "react";
 import LoggedInRoute from "./protectedRoutes/LoggedInRoute";
@@ -92,7 +92,7 @@ function App() {
             path="/profile_settings"
             element={
               <LoggedInRoute user={user}>
-                <ProfileSettings />{" "}
+                <ProfileInfo />{" "}
               </LoggedInRoute>
             }
           />
