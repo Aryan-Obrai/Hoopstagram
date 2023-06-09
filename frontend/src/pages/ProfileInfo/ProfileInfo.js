@@ -46,21 +46,22 @@ function ProfileInfo() {
 
   async function updateInfo(e) {
     e.preventDefault();
-    let updatedInfo = {};
+    let newInfo = {};
+    setErrorMsg();
 
     if (username !== user.username) {
-      updatedInfo.updatedUsername = username;
+      newInfo.updatedUsername = username;
     }
 
     if (email !== user.email) {
-      updatedInfo.updatedEmail = email;
+      newInfo.updatedEmail = email;
     }
 
     if (password) {
-      updatedInfo.password = password;
+      newInfo.password = password;
     }
 
-    if (updatedInfo.length > 0) {
+    if (Object.keys(newInfo).length > 0) {
       const response = await fetch("http://localhost:5000/user/update_info", {
         method: "PUT",
         mode: "cors",
@@ -70,7 +71,7 @@ function ProfileInfo() {
         },
         credentials: "include",
         body: JSON.stringify({
-          info: updatedInfo,
+          info: newInfo,
         }),
       });
 

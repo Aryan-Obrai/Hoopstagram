@@ -5,7 +5,7 @@ import { UserContext } from "../contexts/UserContext";
 import UserMenu from "../components/UserMenu";
 
 function Navbar() {
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   return (
     <nav>

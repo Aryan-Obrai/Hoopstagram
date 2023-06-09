@@ -1,13 +1,24 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import "./ProfileInput.css";
+import useOutsideComponent from "../../hooks/useOutsideComponent";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faCheck } from "@fortawesome/free-solid-svg-icons";
 
 function ProfileInput(props) {
   const { type, setter, state } = props;
   const [editMode, setEditMode] = useState(false);
+  const focusRef = useRef();
+  const wrapperRef = useRef(null);
+  useOutsideComponent(wrapperRef, setEditMode);
 
   const label = type.charAt(0).toUpperCase() + type.slice(1);
+
+  //focus on input when editMode is true
+  useEffect(() => {
+    if (editMode) {
+      focusRef.current.focus();
+    }
+  }, [editMode]);
 
   function toggleEdit(e) {
     e.preventDefault();
@@ -22,8 +33,9 @@ function ProfileInput(props) {
   return (
     <div className="profile-input">
       <label htmlFor={type}>{label}</label>
-      <div className="input-and-btn">
+      <div className="input-and-btn" ref={wrapperRef}>
         <input
+          ref={focusRef}
           autoComplete="off"
           id={type}
           name={type}

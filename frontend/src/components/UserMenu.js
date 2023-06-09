@@ -1,6 +1,7 @@
 import "./UserMenu.css";
 import { Link } from "react-router-dom";
-import { useContext, useState, useEffect, useRef } from "react";
+import { useContext, useState, useRef } from "react";
+import useOutsideComponent from "../hooks/useOutsideComponent";
 import { UserContext } from "../contexts/UserContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -9,27 +10,11 @@ import {
   faGear,
 } from "@fortawesome/free-solid-svg-icons";
 
-//custom hook that closes user menu when user clicks anywhere outside of it
-function useOutsideUserMenu(ref, setShowMenu) {
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (ref.current && !ref.current.contains(event.target)) {
-        setShowMenu(false);
-      }
-    }
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [ref, setShowMenu]);
-}
-
 function UserMenu() {
-  const { user, setUser } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
   const [showMenu, setShowMenu] = useState(false);
   const wrapperRef = useRef(null);
-  useOutsideUserMenu(wrapperRef, setShowMenu);
+  useOutsideComponent(wrapperRef, setShowMenu);
 
   async function handleLogout() {
     const response = await fetch("http://localhost:5000/auth/logout", {
