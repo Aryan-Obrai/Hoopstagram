@@ -70,12 +70,12 @@ function PickTeams(props) {
     }
   }, []);
 
-  //enable/disable done button if selectedTeams is not empty
+  //enable/disable done button if selectedTeams is not empty on sign up
   useEffect(() => {
-    if (selectedTeams.length > 0) {
-      setEnableDoneButton(true);
-    } else if (initial && selectedTeams.length <= 0) {
+    if (initial && selectedTeams.length <= 0) {
       setEnableDoneButton(false);
+    } else {
+      setEnableDoneButton(true);
     }
   }, [selectedTeams, initial]);
 
