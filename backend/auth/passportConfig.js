@@ -52,6 +52,7 @@ module.exports = function (passport) {
       done
     ) {
       try {
+        console.log(req.body);
         const usernameCheck = await User.find({ username: username });
         const emailCheck = await User.find({ email: req.body.email });
 

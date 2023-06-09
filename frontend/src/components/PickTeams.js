@@ -37,7 +37,7 @@ function PickTeams(props) {
   ];
 
   //lets parent component know user is done picking teams
-  const { showThisComponent, initial, buttonText } = props;
+  const { doneSelecting, initial, buttonText } = props;
 
   const [selectedTeams, setSelectedTeams] = useState([]);
 
@@ -96,12 +96,12 @@ function PickTeams(props) {
     const responseData = await response.json();
 
     if (responseData.status === true) {
-      showThisComponent(false);
+      doneSelecting(true);
     }
   }
 
   function skip() {
-    showThisComponent(false);
+    doneSelecting(true);
   }
 
   return (

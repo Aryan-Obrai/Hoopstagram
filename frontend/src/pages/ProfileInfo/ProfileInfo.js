@@ -15,6 +15,8 @@ function ProfileInfo() {
 
   const [showPickTeams, setShowPickTeams] = useState(false);
 
+  const [donePickingTeams, setDonePickingTeams] = useState(false);
+
   const fields = ["username", "email", "password"];
 
   //sending corresponding setter in props
@@ -41,6 +43,7 @@ function ProfileInfo() {
 
   function editButton(e) {
     e.preventDefault();
+    setDonePickingTeams(false);
     setShowPickTeams(true);
   }
 
@@ -86,11 +89,17 @@ function ProfileInfo() {
     }
   }
 
+  useEffect(() => {
+    if (donePickingTeams) {
+      setShowPickTeams(false);
+    }
+  }, [donePickingTeams]);
+
   return (
     <div>
       {showPickTeams ? (
         <PickTeams
-          showThisComponent={setShowPickTeams}
+          doneSelecting={setDonePickingTeams}
           initial={false}
           username={user.username}
           buttonText={"Cancel"}

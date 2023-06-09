@@ -49,7 +49,7 @@ router.get("/teams_players", (req, res) => {});
 //PUT Methods
 router.put("/update_info", async (req, res) => {
   if (req.user) {
-    console.log(req.body.info);
+    const info = req.body.info;
 
     res.status(200).send({ status: true });
   } else {
