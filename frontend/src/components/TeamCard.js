@@ -10,9 +10,10 @@ function TeamCard(props) {
 
   let setWidth = setImgWidth(teamFormatted);
 
+  //weird behavior where setting to false gives intended behavior
   const [selected, setSelected] = useState(true);
 
-  //FIXME: issue with getting selected teams to style on load
+  //pre-apply selected style for logged users' in favorite teams
   useEffect(() => {
     if (!initial) {
       if (selectedTeams.includes(team)) {

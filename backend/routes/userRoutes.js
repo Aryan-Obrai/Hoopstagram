@@ -47,7 +47,15 @@ router.get("/teams_players", (req, res) => {});
 //POST Methods
 
 //PUT Methods
-router.put("/update_info", async (req, res) => {});
+router.put("/update_info", async (req, res) => {
+  if (req.user) {
+    console.log(req.body);
+
+    res.status(200).send({ status: true });
+  } else {
+    res.sendStatus(404);
+  }
+});
 
 router.put("/pick_teams", async (req, res) => {
   if (req.user) {

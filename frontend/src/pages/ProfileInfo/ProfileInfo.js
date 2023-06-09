@@ -11,9 +11,9 @@ function ProfileInfo() {
   const [email, setEmail] = useState(user.email);
   const [password, setPassword] = useState("");
 
-  const [showPickTeams, setShowPickTeams] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
-  const [donePickingTeams, setDonePickingTeams] = useState(false);
+  const [showPickTeams, setShowPickTeams] = useState(false);
 
   const fields = ["username", "email", "password"];
 
@@ -41,17 +41,8 @@ function ProfileInfo() {
 
   function editButton(e) {
     e.preventDefault();
-    setDonePickingTeams(false);
     setShowPickTeams(true);
   }
-
-  //listens for donePickingTeams
-  //if it is true remove this component from screen
-  useEffect(() => {
-    if (donePickingTeams) {
-      setShowPickTeams(false);
-    }
-  }, [donePickingTeams]);
 
   async function updateInfo(e) {
     e.preventDefault();
@@ -69,14 +60,36 @@ function ProfileInfo() {
       updatedInfo.password = password;
     }
 
-    console.log(updatedInfo);
+    if (updatedInfo.length > 0) {
+      const response = await fetch("http://localhost:5000/user/update_info", {
+        method: "PUT",
+        mode: "cors",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          info: updatedInfo,
+        }),
+      });
+
+      const responseData = await response.json();
+
+      //error
+      if (responseData.errorMsg) {
+        setErrorMsg(responseData.errorMsg);
+      }
+    } else {
+      setErrorMsg("You didnt change anything!");
+    }
   }
 
   return (
     <div>
       {showPickTeams ? (
         <PickTeams
-          doneSelecting={setDonePickingTeams}
+          showThisComponent={setShowPickTeams}
           initial={false}
           username={user.username}
           buttonText={"Cancel"}
@@ -86,7 +99,7 @@ function ProfileInfo() {
       )}
       <form id="profile-info-form">
         <h1>Profile Settings</h1>
-
+        {errorMsg ? <p className="error-msg">{errorMsg}</p> : ""}
         {fields.map((field) => (
           <ProfileInput
             key={field}
