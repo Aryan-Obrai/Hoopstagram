@@ -4,7 +4,7 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import "./TeamCard.css";
 
 function TeamCard(props) {
-  const { team, setTeams, selectedTeams, initial } = props;
+  const { team, setTeams, selectedTeams, initial, displayOnly } = props;
 
   let { imgURL, altText, teamFormatted } = setImgUrl(team);
 
@@ -15,7 +15,7 @@ function TeamCard(props) {
 
   //pre-apply selected style for logged users' in favorite teams
   useEffect(() => {
-    if (!initial) {
+    if (!initial && !displayOnly) {
       if (selectedTeams.includes(team)) {
         setSelected(false);
       }
@@ -23,15 +23,19 @@ function TeamCard(props) {
   }, []);
 
   function handleClick() {
-    setSelected((prevSelected) => !prevSelected);
+    if (!displayOnly) {
+      setSelected((prevSelected) => !prevSelected);
 
-    if (selected === true) {
-      setTeams([...selectedTeams, team]);
+      if (selected === true) {
+        setTeams([...selectedTeams, team]);
+      } else {
+        const removeTeamSelected = selectedTeams.filter(
+          (currentTeam) => currentTeam !== team
+        );
+        setTeams(removeTeamSelected);
+      }
     } else {
-      const removeTeamSelected = selectedTeams.filter(
-        (currentTeam) => currentTeam !== team
-      );
-      setTeams(removeTeamSelected);
+      //go to team page
     }
   }
 

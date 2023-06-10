@@ -123,6 +123,7 @@ function PickTeams(props) {
                 team={team}
                 setTeams={setSelectedTeams}
                 selectedTeams={selectedTeams}
+                displayOnly={false}
               />
             ))}
           </div>

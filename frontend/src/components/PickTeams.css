@@ -9,7 +9,7 @@
     left: 50%;
     transform: translateX(-50%) scale(0.75);
     z-index: 1;
-    
+
 }
 
 #pick-teams-heading {
@@ -34,7 +34,6 @@
 }
 
 #pick-teams-btns button {
-    
     font-size: 1.1rem;
     font-weight: 600;
     height: 40px;
