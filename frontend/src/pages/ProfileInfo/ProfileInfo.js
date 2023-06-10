@@ -52,6 +52,11 @@ function ProfileInfo() {
     let newInfo = {};
     setErrorMsg();
 
+    let emailRE = /^\S+@\S+$/;
+    if (!emailRE.test(email)) {
+      return setErrorMsg("Incorrect email format");
+    }
+
     if (username !== user.username) {
       newInfo.username = username;
     }

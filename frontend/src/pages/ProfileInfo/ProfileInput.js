@@ -30,11 +30,17 @@ function ProfileInput(props) {
     placeholder = "Set new password";
   }
 
+  let inputType = "text";
+  if (type === "email") {
+    inputType = "email";
+  }
+
   return (
     <div className="profile-input">
       <label htmlFor={type}>{label}</label>
       <div className="input-and-btn" ref={wrapperRef}>
         <input
+          type={inputType}
           ref={focusRef}
           autoComplete="off"
           id={type}
