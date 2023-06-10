@@ -53,11 +53,11 @@ function ProfileInfo() {
     setErrorMsg();
 
     if (username !== user.username) {
-      newInfo.updatedUsername = username;
+      newInfo.username = username;
     }
 
     if (email !== user.email) {
-      newInfo.updatedEmail = email;
+      newInfo.email = email;
     }
 
     if (password) {
@@ -83,10 +83,13 @@ function ProfileInfo() {
       //error
       if (responseData.errorMsg) {
         setErrorMsg(responseData.errorMsg);
+      } else {
+        console.log(responseData.user);
       }
     } else {
       setErrorMsg("You didnt change anything!");
     }
+    console.log(user);
   }
 
   useEffect(() => {

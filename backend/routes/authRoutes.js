@@ -1,25 +1,8 @@
 const express = require("express");
 const passport = require("passport");
+const isValidRequest = require("../middleware/middleware");
 
 const router = express.Router();
-
-//Middleware function
-//Makes sure form is not empty upon submission
-const isValidRequest = (req, res, next) => {
-  let valid = true;
-  for (const field in req.body) {
-    if (req.body[field].length == 0) {
-      valid = false;
-      break;
-    }
-  }
-
-  if (valid) {
-    next();
-  } else {
-    res.status(422).send({ errorMsg: "Empty form submitted" });
-  }
-};
 
 //signup and login use Passport.js Middleware to authenticate
 //located in auth/passportConfig.js
