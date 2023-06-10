@@ -5,7 +5,7 @@ import ProfileInput from "./ProfileInput";
 import PickTeams from "../../components/PickTeams";
 
 function ProfileInfo() {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
   const [username, setUsername] = useState(user.username);
   const [email, setEmail] = useState(user.email);
@@ -84,12 +84,10 @@ function ProfileInfo() {
       if (responseData.errorMsg) {
         setErrorMsg(responseData.errorMsg);
       } else {
-        console.log(responseData.user);
+        setUser(responseData.user);
+        setPassword("");
       }
-    } else {
-      setErrorMsg("You didnt change anything!");
     }
-    console.log(user);
   }
 
   useEffect(() => {

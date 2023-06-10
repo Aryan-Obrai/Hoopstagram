@@ -1,6 +1,7 @@
 import "./PickTeams.css";
 import TeamCard from "./TeamCard";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { UserContext } from "../contexts/UserContext";
 
 function PickTeams(props) {
   const teams = [
@@ -35,6 +36,8 @@ function PickTeams(props) {
     "Utah Jazz ",
     "Washington Wizards",
   ];
+
+  const { setUser } = useContext(UserContext);
 
   //lets parent component know user is done picking teams
   const { doneSelecting, initial, buttonText } = props;
@@ -96,6 +99,8 @@ function PickTeams(props) {
     const responseData = await response.json();
 
     if (responseData.status === true) {
+      //update global user context with updated favorite teams
+      setUser(responseData.user);
       doneSelecting(true);
     }
   }

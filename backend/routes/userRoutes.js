@@ -103,8 +103,13 @@ router.put("/update_info", isValidRequest, async (req, res) => {
         { new: true }
       );
 
-      let formattedUser = update;
-      formattedUser.password = undefined;
+      let formattedUser = {
+        username: update.username,
+        email: update.email,
+        _id: update._id,
+        favoriteTeams: update.favoriteTeams,
+      };
+
       return res.status(201).send({ user: formattedUser });
     }
   } else {
@@ -120,7 +125,18 @@ router.put("/pick_teams", async (req, res) => {
       { new: true }
     );
 
-    res.status(200).send({ status: true });
+    let formattedUser = {
+      username: update.username,
+      email: update.email,
+      _id: update._id,
+      favoriteTeams: update.favoriteTeams,
+    };
+
+    console.log(
+      "\nUpdated favorite teams for user " + req.user[0].username + "\n"
+    );
+
+    res.status(200).send({ status: true, user: formattedUser });
   } else {
     res.sendStatus(404);
   }
