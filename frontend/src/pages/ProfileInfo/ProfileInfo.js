@@ -12,6 +12,7 @@ function ProfileInfo() {
   const [password, setPassword] = useState("");
 
   const [errorMsg, setErrorMsg] = useState("");
+  const [successMsg, setSuccessMsg] = useState("");
 
   const [showPickTeams, setShowPickTeams] = useState(false);
 
@@ -51,6 +52,7 @@ function ProfileInfo() {
     e.preventDefault();
     let newInfo = {};
     setErrorMsg();
+    setSuccessMsg();
 
     let emailRE = /^\S+@\S+$/;
     if (!emailRE.test(email)) {
@@ -91,7 +93,10 @@ function ProfileInfo() {
       } else {
         setUser(responseData.user);
         setPassword("");
+        setSuccessMsg("Updated successfully!");
       }
+    } else {
+      setErrorMsg("No changes were made");
     }
   }
 
@@ -116,6 +121,7 @@ function ProfileInfo() {
       <form id="profile-info-form">
         <h1>Profile Settings</h1>
         {errorMsg ? <p className="error-msg">{errorMsg}</p> : ""}
+        {successMsg ? <p className="success-msg">{successMsg}</p> : ""}
         {fields.map((field) => (
           <ProfileInput
             key={field}

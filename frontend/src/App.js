@@ -100,7 +100,7 @@ function App() {
             path="/profile"
             element={
               <LoggedInRoute user={user}>
-                <Profile />
+                <Profile profile={"this"} />
               </LoggedInRoute>
             }
           />

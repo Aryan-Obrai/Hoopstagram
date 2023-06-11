@@ -1,0 +1,28 @@
+#teams {
+    display: grid;
+    position: absolute;
+    gap: 10px;
+    top: 105px;
+    width: 100vw;
+    padding-bottom: 10px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    grid-template-columns: repeat(30, auto);
+
+}
+
+
+#teams::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 10px;
+    height: 20px;
+    background-color: var(--post-bg);
+
+}
+
+#teams::-webkit-scrollbar-thumb {
+    background-color: var(--grey);
+    border: 3px solid transparent;
+    border-radius: 1rem;
+    background-clip: content-box;
+}

@@ -132,9 +132,7 @@ router.put("/pick_teams", async (req, res) => {
       favoriteTeams: update.favoriteTeams,
     };
 
-    console.log(
-      "\nUpdated favorite teams for user " + req.user[0].username + "\n"
-    );
+    console.log("\nUpdated favorite teams for user " + req.user[0].username);
 
     res.status(200).send({ status: true, user: formattedUser });
   } else {

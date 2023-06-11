@@ -2,41 +2,9 @@ import "./PickTeams.css";
 import TeamCard from "./TeamCard";
 import { useEffect, useState, useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
+import { teams } from "./teamList";
 
 function PickTeams(props) {
-  const teams = [
-    "Atlanta Hawks ",
-    "Boston Celtics ",
-    "Brooklyn Nets",
-    "Charlotte Hornets ",
-    "Chicago Bulls ",
-    "Cleveland Cavaliers ",
-    "Dallas Mavericks ",
-    "Denver Nuggets ",
-    "Detroit Pistons ",
-    "Golden State Warriors ",
-    "Houston Rockets ",
-    "Indiana Pacers ",
-    "Los Angeles Clippers ",
-    "Los Angeles Lakers ",
-    "Memphis Grizzlies ",
-    "Miami Heat ",
-    "Milwaukee Bucks ",
-    "Minnesota Timberwolves ",
-    "New Orleans Pelicans ",
-    "New York Knicks ",
-    "Oklahoma City Thunder ",
-    "Orlando Magic ",
-    "Philadelphia Sixers ",
-    "Phoenix Suns ",
-    "Portland Trail Blazers ",
-    "Sacramento Kings ",
-    "San Antonio Spurs ",
-    "Toronto Raptors ",
-    "Utah Jazz ",
-    "Washington Wizards",
-  ];
-
   const { setUser } = useContext(UserContext);
 
   //lets parent component know user is done picking teams
@@ -116,7 +84,7 @@ function PickTeams(props) {
           <h1 id="pick-teams-heading">Select your favorite teams</h1>
 
           <div id="pick-teams">
-            {teams.map((team) => (
+            {Object.keys(teams).map((team) => (
               <TeamCard
                 initial={initial}
                 key={team}

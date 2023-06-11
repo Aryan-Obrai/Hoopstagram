@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import "./TeamCard.css";
+import { teams } from "./teamList";
 
 function TeamCard(props) {
-  const { team, setTeams, selectedTeams, initial, displayOnly } = props;
+  const { team, setTeams, selectedTeams, initial, displayOnly, abbreviated } =
+    props;
 
   let { imgURL, altText, teamFormatted } = setImgUrl(team);
 
@@ -49,7 +51,7 @@ function TeamCard(props) {
         className={selected ? "check" : "check checked"}
       />
       <img src={imgURL} alt={altText} style={setWidth}></img>
-      <h1>{team}</h1>
+      {abbreviated ? <h1>{teams[team]}</h1> : <h1>{team}</h1>}
     </button>
   );
 }

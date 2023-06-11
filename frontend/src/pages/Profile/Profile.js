@@ -3,8 +3,15 @@ import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import TeamCard from "../../components/TeamCard";
 
-function Profile() {
+function Profile(props) {
   const { user } = useContext(UserContext);
+  let profileUser;
+
+  if (props.profile === "this") {
+    profileUser = user;
+  } else {
+    //fetch the given username's profile info
+  }
 
   return (
     <div id="profile-container">
@@ -15,11 +22,11 @@ function Profile() {
           alt="Profile pic"
           width={75}
         ></img>
-        <h1>{user.username}</h1>
+        <h1>{profileUser.username}</h1>
       </div>
       <h2>Favorite Teams</h2>
       <div id="favorite-teams-container">
-        {user.favoriteTeams.map((team) => (
+        {profileUser.favoriteTeams.map((team) => (
           <TeamCard key={team} team={team} displayOnly={true} />
         ))}
       </div>
