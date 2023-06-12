@@ -25,9 +25,10 @@ router.get("/account_info", (req, res) => {
   }
 });
 
-router.get("/feed", (req, res) => {
+router.get("/feed", async (req, res) => {
   if (req.user) {
-    const allPosts = Post.find({});
+    const allPosts = await Post.find({});
+    console.log(allPosts)
     console.log("loaded all posts");
     res.send(allPosts);
   } else {

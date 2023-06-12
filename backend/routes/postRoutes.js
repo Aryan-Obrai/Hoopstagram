@@ -11,11 +11,21 @@ const router = express.Router();
 router.get("/view/:id", async (req, res) => {
     //dont need auth here
     let id = req.params.id;
-    const post = await Post.findById({
-        id
-    })
+    const post = await Post.findById(id)
 
-    res.send(post)
+    const user = await User.findById(post.user)
+
+    console.log(user.username)
+    let author = user.username
+    console.log(req.user)
+    if (req.user)
+    {
+
+        ownpost = author === req.user[0].username
+    }
+    else ownpost = false
+
+    res.send({post, author, ownpost})
 });
 
 router.get("/comments/:post", async (req, res) =>
@@ -142,17 +152,18 @@ router.post("/dislike", async (req, res) => {
 router.delete("/delete", async (req, res) => {
     if (req.user)
     {
-        const { title } = req.body
+        const { id } = req.body
         const user = await User.findOne({
             username: req.user[0].username,
         });
-        const post = await Post.findOne({
-            title
-        })
+        const post = await Post.findById(
+            id
+        )
         // check if user made post
-        if (post.user == user)
+        if (req.user)
         {
-            await Post.findOneAndDelete({title})
+            await Post.findByIdAndDelete(id)
+            res.redirect('/feed')
         }
         else
         {

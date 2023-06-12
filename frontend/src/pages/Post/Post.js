@@ -1,26 +1,100 @@
-import "./Post.css";
 import { useParams } from "react-router-dom";
 
+import "./Post.css";
+import React from 'react'
 
-function Post() 
-{
-    const { id } = useParams()
-    let ownpost = true;
+const PostWrapper = () => {
+  const { id } = useParams();
+  return <Post id={id}  />;
+};
 
+class Post extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: null,
+      id: null,
+    };
+  }
 
-    return (
+  componentDidMount() {
+    const { id } = this.props;
+    this.setState({ id }, () => {
+      this.getData();
+    });
+  }
+
+  async getData() {
+    const res = await fetch(`http://localhost:5000/post/view/${this.state.id}`, {
+      method: "GET",
+      mode: "cors",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    });
+
+    const data = await res.json();
+    this.setState({ data });
+  }
+
+    handleDelete = () => {
+        const { id } = this.state;
+
+        fetch("http://localhost:5000/post/delete", {
+            method: "DELETE",
+            mode: "cors",
+            headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            },
+            credentials: "include",
+            body: JSON.stringify({ id: id }),
+        })
+        .then((res) => { 
+            window.location.href = "/feed"
+        })
+        
+ 
+    };
+
+  handleEdit = () => {
+    // Perform the edit action
+    // Add your code here to handle the edit functionality
+    console.log("Edit action triggered");
+  };
+
+  render() {
+    if (this.state.data == null) {
+      return (
         <div>
-        <div id="postdiv">
-            <h1>Testing Post<small>by test author</small></h1>
+          <div id="postdiv">
+            <h1>Loading <small>by loading</small></h1>
             <div>
-                This is a test post
+              Loading
             </div>
-            {ownpost ? <div><button id="btns-delete" class="btn">Delete</button>
-            <button id="btns-edit" class="btn">Edit</button></div> : ""}
-        </div> 
+          </div> 
         </div>
-      )
+      );
+    } else {
+      return (
+        <div>
+          <div id="postdiv">
+            <h1>{this.state.data.post.title} <small>by {this.state.data.author}</small></h1>
+            <div>
+              {this.state.data.post.text}
+            </div>
+            {this.state.data.ownpost ? (
+              <div>
+                <button id="btns-delete" className="btn" onClick={this.handleDelete}>Delete</button>
+              </div>
+            ) : ""}
+          </div> 
+        </div>
+      );
+    }
+  }
 }
 
-
-export default Post;
+export default PostWrapper;
