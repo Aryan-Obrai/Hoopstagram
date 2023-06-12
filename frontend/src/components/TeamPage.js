@@ -21,6 +21,12 @@ const TeamPage = ({ data }) => {
     }
   };
 
+  const convertToFeetAndInches = (inches) => {
+    const feet = Math.floor(inches / 12);
+    const remainingInches = inches % 12;
+    return `${feet} ft ${remainingInches} in`;
+  };
+
   return (
     <div className="team-page">
       <div className="roster">
@@ -47,7 +53,7 @@ const TeamPage = ({ data }) => {
                       <div className="player-stats-back">
                         <span className="player-jersey-back">Jersey Number: {player.jerseyNumber}</span>
                         <span className="player-weight-back">Weight: {player.weight}lbs</span>
-                        <span className="player-height-back">Height: {player.height}in.</span>
+                        <span className="player-height-back">Height: {convertToFeetAndInches(player.height)}</span>
                       </div>
                     </div>
                   </div>
