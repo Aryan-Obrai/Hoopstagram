@@ -8,9 +8,9 @@ const TeamPage = ({ data }) => {
 
   return (
     <div className="team-page">
-      <h1>TeamPage</h1>
+      {/* <h1>TeamPage</h1> */}
       <div className="roster">
-        <h2>Roster</h2>
+        {/* <h2>Roster</h2> */}
         <div className="team-roster">
           {data.roster.map((player) => (
             <div key={player.tid} className="player-box">
