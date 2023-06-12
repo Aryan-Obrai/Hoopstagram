@@ -92,10 +92,10 @@
     top: 15px;
     position: relative;
     padding: 10px;
-    display: flex; /* Add this line */
-    flex-direction: column; /* Add this line */
-    align-items: center; /* Add this line */
-    text-align: center; /* Add this line */
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    text-align: center; 
   }
   
   .player-height,
@@ -111,8 +111,8 @@
     text-align: center;
     text-shadow: 0 0 5px rgba(255, 255, 255, 0.61);
     margin-bottom: 0.5em;
-    word-wrap: break-word; /* Add this line */
-    white-space: normal; /* Change this line */
+    word-wrap: break-word; 
+    white-space: normal; 
   }
   
   .player-details-back {
@@ -120,7 +120,7 @@
     flex-direction: column;
     align-items: center;
     margin-top: 1em;
-    max-width: 150px; /* Adjust the maximum width as needed */
+    max-width: 150px; 
     text-align: center;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -134,7 +134,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 120px; /* Adjust the maximum width as needed */
+    max-width: 120px; 
   }
   
   .player-stats-back {
