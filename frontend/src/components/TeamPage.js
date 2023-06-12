@@ -17,9 +17,10 @@ const TeamPage = ({ data }) => {
               <img className="player-images" src={player.playerIMG} alt="Profile" />
               <div className="player-text">
                 <span className="player-name">{player.name}</span>
-                <span className="player-jersey"> Jersey Number: {player.jerseyNumber}</span>
+                <br></br>
+                {/* <span className="player-jersey"> Jersey Number: {player.jerseyNumber}</span>
                 <span className="player-weight"> Weight: {player.weight}lbs</span>
-                <span className="player-height"> Height: {player.height}</span>
+                <span className="player-height"> Height: {player.height}</span> */}
                 <span className="player-position"> Postion: {player.position}</span>
               </div>
             </div>
