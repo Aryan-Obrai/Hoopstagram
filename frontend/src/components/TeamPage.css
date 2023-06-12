@@ -84,8 +84,8 @@
     height: auto;
     object-fit: cover;
     position: relative;
-    top: -30px;
-    left: -50px;
+    top: -10px;
+    left: -5px;
   }
   
   .player-text {
