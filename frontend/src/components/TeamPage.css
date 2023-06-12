@@ -17,6 +17,12 @@
     padding: 1em;
     margin-inline: 0.5em;
     margin-top: 0.5em;
+    transition: 0.2s ease-in-out;
+}
+
+.player-box:hover {
+    background-color: var(--hover);
+    transform: scale(1.05);
 }
 
 .player-images {
