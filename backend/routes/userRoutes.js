@@ -31,8 +31,6 @@ router.get("/feed", async (req, res) => {
     console.log(allPosts)
     console.log("loaded all posts");
     res.send(allPosts);
-  } else {
-    res.send({ msg: "NOT LOGGED IN" });
   }
 });
 

@@ -59,12 +59,6 @@ class Post extends React.Component {
  
     };
 
-  handleEdit = () => {
-    // Perform the edit action
-    // Add your code here to handle the edit functionality
-    console.log("Edit action triggered");
-  };
-
   render() {
     if (this.state.data == null) {
       return (
