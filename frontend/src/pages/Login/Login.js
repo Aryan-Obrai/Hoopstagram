@@ -13,6 +13,9 @@ function Login() {
 
   let [errorMsg, setErrorMsg] = useState("");
 
+  //set google to false if clicked on login button
+  const [google, setGoogle] = useState(true);
+
   function validSubmission() {
     //submission must be not empty
     if (usernameRef.current.value && passwordRef.current.value) {
@@ -25,6 +28,9 @@ function Login() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+
+    //using passport in backend instead of sending form
+    if (google) return;
 
     if (validSubmission()) {
       const response = await fetch("http://localhost:5000/auth/login", {
@@ -75,7 +81,11 @@ function Login() {
           name="password"
           autoComplete="off"
         ></input>
-        <button id="login-form-btn" type="submit">
+        <button
+          id="login-form-btn"
+          type="submit"
+          onClick={() => setGoogle(false)}
+        >
           Log in 🏀
         </button>
         <GoogleButton />

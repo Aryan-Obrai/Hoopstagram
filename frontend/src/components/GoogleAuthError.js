@@ -8,7 +8,7 @@ function GoogleAuthError() {
   useEffect(() => {
     setTimeout(() => {
       navigate("/signup");
-    }, 2000);
+    }, 1500);
   }, []);
 
   return (
