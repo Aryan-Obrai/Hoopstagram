@@ -11,7 +11,6 @@
 
 }
 
-
 #teams::-webkit-scrollbar {
     -webkit-appearance: none;
     width: 10px;
@@ -25,4 +24,15 @@
     border: 3px solid transparent;
     border-radius: 1rem;
     background-clip: content-box;
+}
+
+#teams::-webkit-scrollbar-thumb:hover {
+    background-color: var(--accent);
+
+}
+
+#test-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
 }

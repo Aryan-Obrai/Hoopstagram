@@ -27,7 +27,7 @@ function Profile(props) {
       <h2>Favorite Teams</h2>
       <div id="favorite-teams-container">
         {profileUser.favoriteTeams.map((team) => (
-          <TeamCard key={team} team={team} displayOnly={true} />
+          <TeamCard key={team} team={team} />
         ))}
       </div>
     </div>

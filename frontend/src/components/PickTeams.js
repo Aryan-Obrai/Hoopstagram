@@ -91,7 +91,7 @@ function PickTeams(props) {
                 team={team}
                 setTeams={setSelectedTeams}
                 selectedTeams={selectedTeams}
-                displayOnly={false}
+                pickTeamsView={true}
               />
             ))}
           </div>
