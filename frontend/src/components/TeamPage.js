@@ -42,10 +42,14 @@ const TeamPage = ({ data }) => {
                   </div>
                   <div className="back">
                     <img className="player-images-back" src={player.playerIMG} alt="Profile" />
-                    <span className="player-name-back">{player.name}</span>
-                    <span className="player-jersey-back">Jersey Number: {player.jerseyNumber}</span>
-                    <span className="player-weight-back">Weight: {player.weight}lbs</span>
-                    <span className="player-height-back">Height: {player.height}</span>
+                    <div className="player-details-back">
+                      <span className="player-name-back">{player.name}</span>
+                      <div className="player-stats-back">
+                        <span className="player-jersey-back">Jersey Number: {player.jerseyNumber}</span>
+                        <span className="player-weight-back">Weight: {player.weight}lbs</span>
+                        <span className="player-height-back">Height: {player.height}</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -54,7 +58,7 @@ const TeamPage = ({ data }) => {
         </div>
       </div>
     </div>
-  );
+  );  
 };
 
 export default TeamPage;

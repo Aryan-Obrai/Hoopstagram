@@ -114,30 +114,26 @@
     text-shadow: 0 0 5px rgba(255, 255, 255, 0.61);
     margin-bottom: 0.5em;
     position: relative;
-    top: -60px;
-    left: 20px;
+    top: -46px;
+    left: 42px;
     padding-left: 3px;
+    word-wrap: break-word;
+    white-space: inherit;
   }
 
-  .player-jersey-back {
-    color: rgb(187, 187, 187);
-    font-size: 1.2rem;
-    left: -8px;
-    position: relative;
+  .player-stats-back {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1em;
   }
-
-  .player-weight-back {
-    color: rgb(187, 187, 187);
-    font-size: 1.2rem;
-    left: -15px;
-    position: relative;
-  }
-
+  
+  .player-jersey-back,
+  .player-weight-back,
   .player-height-back {
     color: rgb(187, 187, 187);
-    font-size: 1.2rem;
-    left: -33px;
-    position: relative;
+    font-size: 0.9rem;
+    margin-bottom: 0.5em;
+    font-family: Georgia, 'Times New Roman', Times, serif;
   }
   
   .player-position {
