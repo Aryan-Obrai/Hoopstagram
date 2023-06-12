@@ -8,11 +8,11 @@ const router = express.Router();
 
 // GET Routes
 
-router.get("/view/:post", async (req, res) => {
+router.get("/view/:id", async (req, res) => {
     //dont need auth here
-    let title = req.params;
-    const post = await Post.findOne({
-        title
+    let id = req.params.id;
+    const post = await Post.findById({
+        id
     })
 
     res.send(post)
@@ -40,8 +40,9 @@ router.post("/create", async (req, res) => {
         let usersLiked = []
         let usersDisliked = []
         const user = await User.findOne({
-            username: req.body.info.username,
+            username: req.user[0].username,
           });
+        console.log(user)
         
         const newPost = new Post({title, text, user, usersLiked, usersDisliked})
         await newPost.save();
@@ -49,7 +50,7 @@ router.post("/create", async (req, res) => {
     }
     else 
     {
-        res.send({ msg: "NOT LOGGED IN" });
+        return res.status(401).send({ errorMsg:  "Try logging in first!"});
     }
 });
 
@@ -66,7 +67,7 @@ router.post("/comment/:post", async (req, res) =>
         })
 
         const user = await User.findOne({
-            username: req.body.info.username,
+            username: req.user[0].username,
           });
         
         const newComment = new Comment({text, user, post})
@@ -91,7 +92,7 @@ router.post("/like", async (req, res) => {
     {
         const { title } = req.body
         const user = await User.findOne({
-            username: req.body.info.username,
+            username: req.user[0].username,
         });
         const post = await Post.findOne({
             title
@@ -116,7 +117,7 @@ router.post("/dislike", async (req, res) => {
     {
         const { title } = req.body
         const user = await User.findOne({
-            username: req.body.info.username,
+            username: req.user[0].username,
         });
         const post = await Post.findOne({
             title
@@ -143,7 +144,7 @@ router.delete("/delete", async (req, res) => {
     {
         const { title } = req.body
         const user = await User.findOne({
-            username: req.body.info.username,
+            username: req.user[0].username,
         });
         const post = await Post.findOne({
             title
