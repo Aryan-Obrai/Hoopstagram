@@ -8,13 +8,13 @@ function GoogleAuthError() {
   useEffect(() => {
     setTimeout(() => {
       navigate("/signup");
-    }, 1500);
+    }, 2000);
   }, []);
 
   return (
     <div id="google-auth-error">
       <img src="/google.png" alt="Google logo"></img>
-      <h1>Something went wrong. Redirecting...</h1>
+      <h1>Invalid credentials or something went wrong. Redirecting...</h1>
     </div>
   );
 }

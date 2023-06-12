@@ -106,27 +106,26 @@ module.exports = function (passport) {
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         callbackURL: "http://localhost:5000/auth/google/callback",
       },
-      async function (accessToken, refreshToken, profile, cb) {
-        const createUser = {
-          username: profile.displayName,
-          email: profile.emails[0].value,
-          googleId: profile.id,
-        };
+      async function (accessToken, refreshToken, profile, done) {
+        const user = await User.find({ googleId: profile.id });
 
-        console.log(createUser);
+        try {
+          //existing user found, return it
+          if (user && user[0]) {
+            return done(null, user && user[0]);
+          }
 
-        // const user = await User.findOrCreate({
-        //   where: { googleId: profile.id },
-        //   defaults: createUser,
-        // }).catch((error) => {
-        //   console.log(error);
-        //   cb(error, null);
-        // });
+          //no user found, create it
+          const newUser = await User.create({
+            username: profile.displayName,
+            email: profile.emails[0].value,
+            googleId: profile.id,
+          });
 
-        // if (user && user[0]) {
-        //   return cb(null, user && user[0]);
-        // }
-        return cb(null, null);
+          return done(null, newUser);
+        } catch (error) {
+          return done(error, null);
+        }
       }
     )
   );

@@ -8,12 +8,14 @@
 
 #google-auth-error h1 {
     color: rgb(85, 85, 85);
+    font-size: 1.75rem;
     font-weight: 500;
     position: absolute;
     top: 50%;
     left: 50%;
+    text-align: center;
     transform: translate(-50%, -50%);
-    width: 600px;
+    width: 750px;
 }
 
 #google-auth-error img {
