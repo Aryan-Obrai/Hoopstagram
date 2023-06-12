@@ -51,7 +51,7 @@ function TeamCard(props) {
       //pass back the index of team in teamList.js
       setTeamView(
         Object.keys(teams).findIndex((currTeam) => currTeam === team),
-        console.log("teamview: " + teamsView)
+        // console.log("teamview: " + teamsView)
       );
     }
     //Profile.js
