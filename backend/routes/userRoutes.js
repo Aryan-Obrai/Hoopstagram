@@ -48,13 +48,29 @@ router.get("/favorite_teams", async (req, res) => {
 
 router.get("/games", (req, res) => {});
 
+router.get("/profile/:id", async (req, res) => {
+  const user = await User.find({ _id: req.params.id });
+
+  if (user) {
+    let formattedUser = {
+      username: user[0].username,
+      email: user[0].email,
+      _id: user[0]._id,
+      favoriteTeams: user[0].favoriteTeams,
+    };
+
+    res.send({ user: formattedUser });
+  } else {
+    res.statusStatus(404);
+  }
+});
+
 //POST Methods
 router.post("/teams_players", (req, res) => {
   let teamPlayers = roster.players.filter(
     (player) => player.tid === req.body.teamID
   );
 
-  console.log(teamPlayers);
   res.send({ roster: teamPlayers });
 });
 
