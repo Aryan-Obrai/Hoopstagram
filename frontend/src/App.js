@@ -7,7 +7,6 @@ import Games from "./pages/Games/Games";
 import TeamsPlayers from "./pages/TeamsPlayers/TeamsPlayers";
 import Signup from "./pages/Signup/Signup";
 import Login from "./pages/Login/Login";
-import PickTeams from "./components/PickTeams";
 import Profile from "./pages/Profile/Profile";
 import ProfileInfo from "./pages/ProfileInfo/ProfileInfo";
 import Post from "./pages/Post/Post";
@@ -15,6 +14,7 @@ import { UserContext } from "./contexts/UserContext";
 import { useEffect, useState } from "react";
 import LoggedInRoute from "./protectedRoutes/LoggedInRoute";
 import LoggedOutRoute from "./protectedRoutes/LoggedOutRoute";
+import GoogleAuthError from "./components/GoogleAuthError";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -88,6 +88,15 @@ function App() {
             }
           />
 
+          <Route
+            path="/auth/google/error"
+            element={
+              <LoggedOutRoute user={user}>
+                <GoogleAuthError />
+              </LoggedOutRoute>
+            }
+          />
+
           {/* Profile Settings Pages */}
           {/* Must be logged in to access*/}
           <Route
@@ -98,20 +107,7 @@ function App() {
               </LoggedInRoute>
             }
           />
-          <Route
-            path="/profile/:id"
-            element={
-                <Profile />
-            }
-          />
-          <Route
-            path="/pick_teams"
-            element={
-              <LoggedInRoute user={user}>
-                <PickTeams />
-              </LoggedInRoute>
-            }
-          />
+          <Route path="/profile/:id" element={<Profile />} />
         </Routes>
       </UserContext.Provider>
     </div>

@@ -91,4 +91,21 @@ router.post("/logout", function (req, res, next) {
   res.sendStatus(200);
 });
 
+router.get(
+  "/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
+);
+
+router.get(
+  "/google/callback",
+  passport.authenticate("google", {
+    failureRedirect: "http://localhost:3000/auth/google/error",
+    successRedirect: "http://localhost:3000/",
+  }),
+  function (req, res) {
+    // Successful authentication, redirect home.
+    res.send("Thank you");
+  }
+);
+
 module.exports = router;

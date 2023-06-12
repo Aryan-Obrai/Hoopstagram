@@ -11,13 +11,16 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
+    allowNull: true,
   },
   password: {
     type: String,
     min: 2,
+    allowNull: true,
   },
-  googleID: {
+  googleId: {
     type: String,
+    allowNull: true,
   },
   favoriteTeams: [{ type: String }],
 });

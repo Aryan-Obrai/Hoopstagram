@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useRef } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { useContext, useState } from "react";
+import GoogleButton from "../../components/GoogleButton";
 
 function Login() {
   const usernameRef = useRef();
@@ -77,6 +78,8 @@ function Login() {
         <button id="login-form-btn" type="submit">
           Log in 🏀
         </button>
+        <GoogleButton />
+
         <div className="existing-user-prompt">
           <p>Don't have an account? Sign up </p>
           <Link to="/signup" className="here">

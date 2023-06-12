@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useRef, useState, useContext, useEffect } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import PickTeams from "../../components/PickTeams";
+import GoogleButton from "../../components/GoogleButton";
 
 function Signup() {
   const usernameRef = useRef();
@@ -111,6 +112,7 @@ function Signup() {
         <button id="signup-form-btn" type="submit">
           Sign up 🚀
         </button>
+        <GoogleButton />
         <div className="existing-user-prompt">
           <p>Already have an account? Login </p>
           <Link to="/login" className="here">
