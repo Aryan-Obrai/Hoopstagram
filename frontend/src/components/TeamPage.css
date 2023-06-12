@@ -36,7 +36,7 @@
   }
   
   .flipped .card {
-    transform: rotateY(180deg);
+    transform: rotateY(180deg) translateX(-30px);
   }
   
   .front,
