@@ -8,7 +8,7 @@ import TeamsPlayers from "./pages/TeamsPlayers/TeamsPlayers";
 
 function App() {
   return (
-    <div>
+    <div className="App">
       <Navbar />
 
       <Routes>
