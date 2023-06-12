@@ -112,6 +112,7 @@
     flex-direction: column;
     transform: translate(-50%, -50%);
     padding: 25px 30px 25px 30px;
+    overflow: auto;
 }
 
 #author
@@ -123,4 +124,9 @@
 #cmnt
 {
     margin: 5px;
+}
+
+#ratebtns
+{
+    position: relative;
 }

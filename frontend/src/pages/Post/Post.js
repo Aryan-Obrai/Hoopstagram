@@ -34,6 +34,22 @@ class Post extends React.Component {
       return false;
     }
   }
+  handleLike = async () =>
+  {
+    const response = await fetch("http://localhost:5000/post/like", {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({
+        id: this.state.id,
+      }),
+    });
+    const responseData = await response.json();
+  }
   handleSubmit = async (e) => {
     e.preventDefault();
     console.log(this.textRef.current.value)
@@ -151,6 +167,11 @@ class Post extends React.Component {
                 <button id="btns-delete" className="btn" onClick={this.handleDelete}>Delete</button>
               </div>
             ) : ""}
+            <div id="ratebtns">
+                <button className="midbtn" onClick={this.handleLike}>Like</button>
+                <a>{this.state.data.post.likes}</a>
+                <button className="midbtn" onClick={this.handleDislike}>Dislike</button>
+            </div>
           </div>
           <div id="commentdiv">
           <form id="comment-form" onSubmit={this.handleSubmit}>

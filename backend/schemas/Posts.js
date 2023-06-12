@@ -21,6 +21,11 @@ const postSchema = new mongoose.Schema({
   usersDisliked: {
     type: Array,
     required: true,
+  },
+  likes:
+  {
+    type: Number,
+    required: true,
   }
 },
 {
