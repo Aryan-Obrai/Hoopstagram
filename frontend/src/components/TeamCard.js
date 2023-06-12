@@ -5,8 +5,16 @@ import "./TeamCard.css";
 import { teams } from "./teamList";
 
 function TeamCard(props) {
-  const { team, setTeams, selectedTeams, initial, displayOnly, abbreviated } =
-    props;
+  const {
+    team,
+    setTeams,
+    selectedTeams,
+    initial,
+    abbreviated,
+    pickTeamsView,
+    teamsView,
+    setTeamView,
+  } = props;
 
   let { imgURL, altText, teamFormatted } = setImgUrl(team);
 
@@ -17,7 +25,7 @@ function TeamCard(props) {
 
   //pre-apply selected style for logged users' in favorite teams
   useEffect(() => {
-    if (!initial && !displayOnly) {
+    if (!initial && pickTeamsView) {
       if (selectedTeams.includes(team)) {
         setSelected(false);
       }
@@ -25,7 +33,8 @@ function TeamCard(props) {
   }, []);
 
   function handleClick() {
-    if (!displayOnly) {
+    //PickTeams.js
+    if (pickTeamsView) {
       setSelected((prevSelected) => !prevSelected);
 
       if (selected === true) {
@@ -36,8 +45,17 @@ function TeamCard(props) {
         );
         setTeams(removeTeamSelected);
       }
-    } else {
-      //go to team page
+    }
+    //TeamsPlayers.js
+    else if (teamsView) {
+      //pass back the index of team in teamList.js
+      setTeamView(
+        Object.keys(teams).findIndex((currTeam) => currTeam === team)
+      );
+    }
+    //Profile.js
+    else {
+      return;
     }
   }
 
