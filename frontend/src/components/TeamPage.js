@@ -52,7 +52,7 @@ const TeamPage = ({ data }) => {
                       <span className="player-name-back">{player.name}</span>
                       <div className="player-stats-back">
                         <span className="player-jersey-back">Jersey Number: {player.jerseyNumber}</span>
-                        <span className="player-weight-back">Weight: {player.weight}lbs</span>
+                        <span className="player-weight-back">Weight: {player.weight} lbs</span>
                         <span className="player-height-back">Height: {convertToFeetAndInches(player.height)}</span>
                       </div>
                     </div>
