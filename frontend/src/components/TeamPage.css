@@ -95,5 +95,7 @@
   .player-position {
     font-size: 0.75rem;
     text-align: center;
+    left: 20%;
+    position: relative;
   }
   
