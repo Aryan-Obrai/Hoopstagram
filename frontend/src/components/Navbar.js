@@ -1,7 +1,12 @@
 import "./Navbar.css";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../contexts/UserContext";
+import UserMenu from "../components/UserMenu";
 
 function Navbar() {
+  const { user } = useContext(UserContext);
+
   return (
     <nav>
       <Link id="logo" to="/">
@@ -18,13 +23,22 @@ function Navbar() {
           </li>
 
           <li>
-            <Link to="/teams+players">Teams & Players</Link>
+            <Link to="/teams_players">Teams & Players</Link>
           </li>
         </ul>
-        <div id="account-btns">
-          <button>Sign-up</button>
-          <button>Login</button>
-        </div>
+
+        {user ? (
+          <UserMenu />
+        ) : (
+          <div id="account-btns">
+            <Link to="/signup">
+              <button>Sign-up</button>
+            </Link>
+            <Link to="/login">
+              <button>Login</button>
+            </Link>
+          </div>
+        )}
       </div>
     </nav>
   );

@@ -1,4 +1,5 @@
 import "./Landing.css";
+import { Link } from "react-router-dom";
 
 function Landing() {
   return (
@@ -12,8 +13,12 @@ function Landing() {
         </div>
         <h3>All-Time Fandom</h3>
         <div id="main-btns">
-          <button id="signup-btn">Sign me up! 🚀</button>
-          <button id="login-btn">Already have an account? 🏀</button>
+          <Link to="/signup">
+            <button id="signup-btn">Sign me up! 🚀</button>
+          </Link>
+          <Link to="/login">
+            <button id="login-btn">Already have an account? 🏀</button>
+          </Link>
         </div>
       </div>
       <img id="NBA-graphic" src="NBA-graphic.png" alt="NBA graphic"></img>
