@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import TeamCard from "../../components/TeamCard";
 
 function Profile() {
-  let { id } = useParams();
+  const { id } = useParams();
 
   const [profile, setProfile] = useState("");
 

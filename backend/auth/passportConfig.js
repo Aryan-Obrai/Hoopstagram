@@ -18,13 +18,21 @@ module.exports = function (passport) {
 
   passport.use(
     "login",
-    new LocalStrategy(async function (username, password, done) {
+    new LocalStrategy({ usernameField: "email" }, async function (
+      username,
+      password,
+      done
+    ) {
       try {
-        const user = await User.find({ username: username });
+        const user = await User.find({ email: username });
 
         //no account with specified username
         if (user.length < 1) {
           return done(null, false, { errorMsg: "Account doesn't exist!" });
+        } else if (user[0].googleId) {
+          return done(null, false, {
+            errorMsg: "Email registered through Google already!",
+          });
         }
 
         const validPassword = await bcrypt.compare(password, user[0].password);
@@ -53,26 +61,18 @@ module.exports = function (passport) {
       done
     ) {
       try {
-        console.log(req.body);
-        const usernameCheck = await User.find({ username: username });
         const emailCheck = await User.find({ email: req.body.email });
 
         //both username and email are taken
-        if (usernameCheck.length > 0 && emailCheck.length > 0) {
+        if (emailCheck[0].googleId && emailCheck.length > 0) {
           return done(null, false, {
-            errorMsg: "Username and email are already taken!",
+            errorMsg: "Email registered through Google!",
           });
         }
-        //username is taken
-        else if (usernameCheck.length > 0) {
-          return done(null, false, {
-            errorMsg: "Username is already taken!",
-          });
-        }
-        //email s taken
+        //email is taken
         else if (emailCheck.length > 0) {
           return done(null, false, {
-            errorMsg: " Email is already taken!",
+            errorMsg: "Email is already taken!",
           });
         }
 
@@ -112,6 +112,9 @@ module.exports = function (passport) {
         try {
           //existing user found, return it
           if (user && user[0]) {
+            console.log("\nLogged in with Google as " + user[0].username);
+            console.log("SESSION STARTED");
+
             return done(null, user && user[0]);
           }
 
@@ -121,6 +124,9 @@ module.exports = function (passport) {
             email: profile.emails[0].value,
             googleId: profile.id,
           });
+
+          console.log("\nSigned up with Google as " + profile.displayName);
+          console.log("SESSION STARTED");
 
           return done(null, newUser);
         } catch (error) {

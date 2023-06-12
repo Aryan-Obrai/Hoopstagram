@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useRef, useState, useContext, useEffect } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import PickTeams from "../../components/PickTeams";
-import GoogleButton from "../../components/GoogleButton";
+import GoogleButton from "../../components/Google/GoogleButton";
 
 function Signup() {
   const usernameRef = useRef();

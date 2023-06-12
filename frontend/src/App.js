@@ -14,7 +14,7 @@ import { UserContext } from "./contexts/UserContext";
 import { useEffect, useState } from "react";
 import LoggedInRoute from "./protectedRoutes/LoggedInRoute";
 import LoggedOutRoute from "./protectedRoutes/LoggedOutRoute";
-import GoogleAuthError from "./components/GoogleAuthError";
+import GoogleAuthError from "./components/Google/GoogleAuthError";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -87,7 +87,6 @@ function App() {
               </LoggedOutRoute>
             }
           />
-
           <Route
             path="/auth/google/error"
             element={
