@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
+const postRoutes = require("./routes/postRoutes")
 //-------------------END Imports-------------------//
 
 app = express();
@@ -44,6 +45,7 @@ app.use(passport.session());
 //Authentication routes for signup and login
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
+app.use("/post", postRoutes);
 //-------------------END Routes-------------------//
 
 //host app and then connect to MongoDB

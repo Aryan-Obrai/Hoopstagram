@@ -1,6 +1,7 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const User = require("../schemas/Users");
+const Post = require("../schemas/Posts");
 const isValidRequest = require("../middleware/middleware");
 
 const router = express.Router();
@@ -25,7 +26,9 @@ router.get("/account_info", (req, res) => {
 
 router.get("/feed", (req, res) => {
   if (req.user) {
-    res.send({ msg: "LOGGED IN" });
+    const allPosts = Post.find({})
+    console.log("loaded all posts")
+    res.send(allPosts)
   } else {
     res.send({ msg: "NOT LOGGED IN" });
   }
