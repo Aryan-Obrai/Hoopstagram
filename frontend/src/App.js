@@ -101,9 +101,7 @@ function App() {
           <Route
             path="/profile/:id"
             element={
-              <LoggedInRoute user={user}>
                 <Profile />
-              </LoggedInRoute>
             }
           />
           <Route

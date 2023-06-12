@@ -105,21 +105,32 @@ textarea {
     display: inline-block;
     vertical-align: middle;
     margin-top: 20px;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 2px;
+    font-size: 20px;
+}
+
+a
+{
+    color:white;
+    font-weight: 600;
 }
 
 .mid
 {
-    margin-top: 4px;
+    margin-top: 10px;
     vertical-align: middle;
 }
 
 .midbtn
 {
+    
     background-color: var(--post-bg);
     border: 3px solid var(--post-bg);
     color: var(--accent);
     cursor: pointer;
-    margin: 5px;
+    margin: 15px;
 }
 .midbtn:hover {
 
@@ -131,4 +142,5 @@ textarea {
 {
     width: 90%;
     margin: 0 auto;
+    font-size: 20px;
 }

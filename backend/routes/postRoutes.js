@@ -30,13 +30,15 @@ router.get("/view/:id", async (req, res) => {
 
 router.get("/comments/:post", async (req, res) =>
 {
-    let title = req.params.post;
+    let id = req.params.post;
     // find post
-    const post = await Post.findOne({
-        title
-    })
+    const post = await Post.findById(
+        id
+    )
     // find all comments
     const postComments = await Comment.find({post})
+    let u = postComments.user
+    const author = await User.findById(u)
     res.send(postComments)
 });
 
@@ -70,29 +72,28 @@ router.post("/comment/:post", async (req, res) =>
     if (req.user)
     {
         const { text } = req.body
-        let title = req.params.post;
+        let id = req.params.post;
+        let username = req.user[0].username
+        console.log(text)
         // find post
-        const post = await Post.findOne({
-            title
-        })
+        const post = await Post.findById(
+            id
+        )
+        console.log(post)
 
         const user = await User.findOne({
-            username: req.user[0].username,
+            username
           });
-        
-        const newComment = new Comment({text, user, post})
-        await newPost.save();
+        console.log(text)
+        console.log(user)
+        console.log(post)
+        const newComment = new Comment({text, username, user, post})
+        await newComment.save();
         res.send({ msg: "CREATED POST!" });
     }
     else 
     {
         res.send({ msg: "NOT LOGGED IN" });
-        const user = await User.findOne({
-            username: req.body.info.username,
-        });
-        const post = await Post.findOne({
-            title
-        })
     }
 });
 

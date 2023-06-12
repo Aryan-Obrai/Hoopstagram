@@ -4,6 +4,7 @@ import "./Feed.css";
 class Feed extends React.Component {
   constructor(props) {
     super(props);
+    // https://stackoverflow.com/questions/62499061/how-to-use-react-useref-in-class-component
     this.textRef = React.createRef();
     this.titleRef = React.createRef();
     this.state = {
@@ -120,7 +121,7 @@ class Feed extends React.Component {
         <div id="posts">
           <h1 className="postsheader">Posts</h1>
           <div id="postcontainer">
-            {array ? array : "You need to log in for this"}
+            {array ? array : "Head over to the login page to begin viewiewing posts!"}
           </div>
         </div>
       </div>
