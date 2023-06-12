@@ -11,7 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 function UserMenu() {
-  const { setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const [showMenu, setShowMenu] = useState(false);
   const wrapperRef = useRef(null);
   useOutsideComponent(wrapperRef, setShowMenu);
@@ -45,7 +45,10 @@ function UserMenu() {
       {showMenu && (
         <ul id="user-menu">
           <li>
-            <Link to="/profile" onClick={() => setShowMenu(false)}>
+            <Link
+              to={`/profile/${user._id}`}
+              onClick={() => setShowMenu(false)}
+            >
               <button>
                 <FontAwesomeIcon icon={faUser} />
                 View Profile

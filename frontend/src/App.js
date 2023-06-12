@@ -10,7 +10,7 @@ import Login from "./pages/Login/Login";
 import PickTeams from "./components/PickTeams";
 import Profile from "./pages/Profile/Profile";
 import ProfileInfo from "./pages/ProfileInfo/ProfileInfo";
-import Post from "./pages/Post/Post"
+import Post from "./pages/Post/Post";
 import { UserContext } from "./contexts/UserContext";
 import { useEffect, useState } from "react";
 import LoggedInRoute from "./protectedRoutes/LoggedInRoute";
@@ -69,7 +69,6 @@ function App() {
           <Route path="/games" element={<Games />} />
           <Route path="/teams_players" element={<TeamsPlayers />} />
 
-
           {/* Auth Pages */}
           {/* Must not be logged in to access*/}
           <Route
@@ -100,10 +99,10 @@ function App() {
             }
           />
           <Route
-            path="/profile"
+            path="/profile/:id"
             element={
               <LoggedInRoute user={user}>
-                <Profile profile={"this"} />
+                <Profile />
               </LoggedInRoute>
             }
           />

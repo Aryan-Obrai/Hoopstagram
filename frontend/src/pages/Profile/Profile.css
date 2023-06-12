@@ -10,6 +10,10 @@
     transform: translateX(-50%);
 }
 
+#profile-username {
+    font-size: 1.75rem;
+}
+
 #profile-container:after {
     position: absolute;
     content: "";
