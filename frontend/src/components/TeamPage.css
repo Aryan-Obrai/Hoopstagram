@@ -1,0 +1,51 @@
+.team-roster {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 2em;
+    position: absolute;
+    top: 23%;
+}
+
+.player-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 150px; /* Adjust the width as desired */
+    background-color: var(--post-bg);
+    border-radius: 10px;
+    padding: 1em;
+    margin-inline: 0.5em;
+    margin-top: 0.5em;
+}
+
+.player-images {
+    width: 100%;
+    height: auto;
+    max-height: 120px; /* Adjust the max height as desired */
+    object-fit: cover;
+}
+
+.player-text {
+    padding: 10px;
+}
+  
+.player-height {
+    color: rgb(187, 187, 187);
+}
+
+.player-weight {
+    color: rgb(187, 187, 187);
+}
+  
+.player-name {
+    color: rgb(187, 187, 187);
+}
+
+.player-jersey {
+    color: rgb(187, 187, 187);
+}
+  
+.player-position {
+    color: rgb(187, 187, 187);
+}

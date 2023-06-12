@@ -50,11 +50,13 @@ function TeamCard(props) {
     else if (teamsView) {
       //pass back the index of team in teamList.js
       setTeamView(
-        Object.keys(teams).findIndex((currTeam) => currTeam === team)
+        Object.keys(teams).findIndex((currTeam) => currTeam === team),
+        console.log("teamview: " + teamsView)
       );
     }
     //Profile.js
     else {
+      console.log("teamview: " + teamsView)
       return;
     }
   }
