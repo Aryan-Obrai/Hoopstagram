@@ -55,8 +55,9 @@ router.post("/create", async (req, res) => {
             username: req.user[0].username,
           });
         console.log(user)
+        let likes = 0
         
-        const newPost = new Post({title, text, user, usersLiked, usersDisliked})
+        const newPost = new Post({title, text, user, usersLiked, usersDisliked, likes})
         await newPost.save();
         res.send({ msg: "CREATED POST!" });
     }
@@ -101,25 +102,35 @@ router.post("/comment/:post", async (req, res) =>
 router.post("/like", async (req, res) => {
     if (req.user)
     {
-        const { title } = req.body
+        let f = false
+        const { id } = req.body
         const user = await User.findOne({
             username: req.user[0].username,
         });
-        const post = await Post.findOne({
-            title
-        })
-        post.usersLiked.forEach((u, i) =>{
-            if (u == user)
+        const post = await Post.findById(id)
+        usersLiked = post.usersLiked
+        usersLiked.forEach((u, i) =>{
+            console.log(u.id)
+            if (u.id == user.id)
             {
                 usersLiked = post.usersLiked
                 usersLiked.splice(i, 1)
-                Post.findOneAndUpdate({title}, {usersLiked})
-                res.send({msg: "LIKED"})
+                likes = post.likes
+                likes = likes - 1;
+                f = true
             }
         })
-        usersLiked = post.usersLiked
-        usersLiked.push(user)
-        Post.findOneAndUpdate({title}, {usersLiked})
+
+        if (!f)
+        {
+            likes = post.likes
+            likes = likes + 1;
+            usersLiked.push(user)
+        }
+
+        await Post.findByIdAndUpdate(id, {usersLiked, likes})
+        console.log(post)
+        res.send({msg: "LIKED"})
     }
 });
 
@@ -133,18 +144,28 @@ router.post("/dislike", async (req, res) => {
         const post = await Post.findOne({
             title
         })
-        post.usersDisliked.forEach((u, i) =>{
-            if (u == user)
-            {
-                usersLiked = post.usersDisliked
-                usersLiked.splice(i, 1)
-                Post.findOneAndUpdate({title}, {usersLiked})
-                res.send({msg: "LIKED"})
-            }
-        })
-        usersLiked = post.usersDisliked
-        usersLiked.push(user)
-        Post.findOneAndUpdate({title}, {usersLiked})
+        if (post.usersDisliked)
+        {
+            post.usersDisliked.forEach((u, i) =>{
+                if (u == user)
+                {
+                    usersDisliked = post.usersDisliked
+                    usersDisliked.splice(i, 1)
+                    likes = post.likes
+                    likes = likes + 1;
+                    Post.findOneAndUpdate({title}, {usersDisliked})
+                    Post.findOneAndUpdate({title}, {likes})
+                    res.send({msg: "LIKED"})
+                }
+            })
+        }
+        usersDisliked = post.usersDisliked
+        likes = post.likes
+        likes = likes - 1;
+        usersDisliked.push(user)
+        Post.findOneAndUpdate({title}, {usersDisliked})
+        Post.findOneAndDelete({title}, {likes})
+
     }
 
 });

@@ -77,9 +77,6 @@ class Feed extends React.Component {
       <div key={index} id="postE">
         <a className="mid" href={`/view/${item._id}`}>{item.title}</a>
         <div className="mid">{item.text}</div>
-        <button className="midbtn">Like</button>
-        <a>0</a>
-        <button className="midbtn">Dislike</button>
       </div>
     ));
 
