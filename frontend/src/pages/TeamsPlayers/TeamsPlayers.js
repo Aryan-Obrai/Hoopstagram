@@ -44,7 +44,7 @@ function TeamsPlayers() {
       </div>
       <div>
       <br></br>
-      {teamView && <TeamPage data={teamData}/>}
+      {teamView !== null && <TeamPage data={teamData}/>}
       </div>
     </div>
   );
