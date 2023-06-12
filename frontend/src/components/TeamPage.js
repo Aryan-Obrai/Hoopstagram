@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./TeamPage.css";
 
 const TeamPage = ({ data }) => {
   const [flippedCards, setFlippedCards] = useState([]);
+
+  useEffect(() => {
+    setFlippedCards([]); // Reset flippedCards whenever data changes
+  }, [data]);
 
   if (!data) {
     return null; // Return null or a loading indicator when data is null
@@ -37,9 +41,11 @@ const TeamPage = ({ data }) => {
                     </div>
                   </div>
                   <div className="back">
-                    <span className="player-jersey">Jersey Number: {player.jerseyNumber}</span>
-                    <span className="player-weight">Weight: {player.weight}lbs</span>
-                    <span className="player-height">Height: {player.height}</span>
+                    <img className="player-images-back" src={player.playerIMG} alt="Profile" />
+                    <span className="player-name-back">{player.name}</span>
+                    <span className="player-jersey-back">Jersey Number: {player.jerseyNumber}</span>
+                    <span className="player-weight-back">Weight: {player.weight}lbs</span>
+                    <span className="player-height-back">Height: {player.height}</span>
                   </div>
                 </div>
               </div>

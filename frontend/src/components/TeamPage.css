@@ -4,7 +4,8 @@
     justify-content: center;
     row-gap: 2em;
     position: absolute;
-    top: 23%;
+    top: 22%;
+    transition: opacity 1.4s ease-in-out;
   }
   
   .player-box {
@@ -15,7 +16,7 @@
     width: 200px;
     height: 200px;
     margin-inline: 0.3em;
-    margin-top: 0.5em;
+    margin-top: 1em;
     cursor: pointer;
   }
   
@@ -26,6 +27,10 @@
     transform-style: preserve-3d;
     transition: transform 0.6s;
     transform-origin: center center;
+  }
+
+  .card:hover {
+    transform: scale(1.05);
   }
   
   .card-inner {
@@ -59,6 +64,11 @@
   .back {
     transform: rotateY(180deg);
     color: rgb(187, 187, 187);
+    transition: transform 0.6s, scale 0.6s;
+  }
+
+  .card:hover .back {
+    transform: rotateY(180deg) scale(1.05);
   }
   
   .player-images {
@@ -66,6 +76,15 @@
     height: auto;
     max-height: 120px;
     object-fit: cover;
+  }
+
+  .player-images-back {
+    width: 40%;
+    height: auto;
+    object-fit: cover;
+    position: relative;
+    top: -30px;
+    left: -50px;
   }
   
   .player-text {
@@ -81,12 +100,44 @@
   .player-position {
     color: rgb(187, 187, 187);
   }
-  
+
+
   .player-name {
     font-size: 0.95rem;
     text-align: center;
     text-shadow: 0 0 5px rgba(255, 255, 255, 0.61);
     margin-bottom: 0.5em;
+  }
+
+  .player-name-back {
+    font-size: 0.85rem;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.61);
+    margin-bottom: 0.5em;
+    position: relative;
+    top: -60px;
+    left: 20px;
+    padding-left: 3px;
+  }
+
+  .player-jersey-back {
+    color: rgb(187, 187, 187);
+    font-size: 1.2rem;
+    left: -8px;
+    position: relative;
+  }
+
+  .player-weight-back {
+    color: rgb(187, 187, 187);
+    font-size: 1.2rem;
+    left: -15px;
+    position: relative;
+  }
+
+  .player-height-back {
+    color: rgb(187, 187, 187);
+    font-size: 1.2rem;
+    left: -33px;
+    position: relative;
   }
   
   .player-position {
