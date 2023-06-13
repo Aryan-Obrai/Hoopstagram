@@ -16,6 +16,7 @@ import LoggedInRoute from "./protectedRoutes/LoggedInRoute";
 import LoggedOutRoute from "./protectedRoutes/LoggedOutRoute";
 import GoogleAuthError from "./components/Google/GoogleAuthError";
 
+
 function App() {
   const [user, setUser] = useState(null);
 
