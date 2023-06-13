@@ -8,7 +8,7 @@ function TeamsPlayers() {
   const [teamView, setTeamView] = useState(0);
 
   useEffect(() => {
-    fetch("http://localhost:5000/user/teams_players", {
+    fetch("http://localhost:5000/stats/teams_players", {
       method: "POST",
       mode: "cors",
       headers: {

@@ -3,7 +3,6 @@ const bcrypt = require("bcrypt");
 const User = require("../schemas/Users");
 const Post = require("../schemas/Posts");
 const isValidRequest = require("../middleware/middleware");
-const roster = require("../data/Roster.json");
 
 const router = express.Router();
 
@@ -28,7 +27,7 @@ router.get("/account_info", (req, res) => {
 router.get("/feed", async (req, res) => {
   if (req.user) {
     const allPosts = await Post.find({});
-    console.log(allPosts)
+    console.log(allPosts);
     console.log("loaded all posts");
     res.send(allPosts);
   }
@@ -45,8 +44,6 @@ router.get("/favorite_teams", async (req, res) => {
   }
 });
 
-router.get("/games", (req, res) => {});
-
 router.get("/profile/:id", async (req, res) => {
   const user = await User.find({ _id: req.params.id });
 
@@ -62,15 +59,6 @@ router.get("/profile/:id", async (req, res) => {
   } else {
     res.statusStatus(404);
   }
-});
-
-//POST Methods
-router.post("/teams_players", (req, res) => {
-  let teamPlayers = roster.players.filter(
-    (player) => player.tid === req.body.teamID
-  );
-
-  res.send({ roster: teamPlayers });
 });
 
 //PUT Methods

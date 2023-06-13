@@ -91,13 +91,9 @@ function setImgUrl(team) {
 function setImgWidth(teamFormatted) {
   let setWidth = { width: "45px" };
   //width is dependent on size of img
-  if (teamFormatted === "cavaliers") {
-    setWidth = { width: "100px" };
-  } else if (teamFormatted === "heat") {
-    setWidth = { width: "130px", overflow: "hidden" };
-  } else if (teamFormatted === "grizzlies" || teamFormatted === "spurs") {
-    setWidth = { width: "70px" };
-  } else if (
+  if (
+    teamFormatted === "spurs" ||
+    teamFormatted === "heat" ||
     teamFormatted === "lakers" ||
     teamFormatted === "pistons" ||
     teamFormatted === "jazz" ||
@@ -110,5 +106,4 @@ function setImgWidth(teamFormatted) {
   }
   return setWidth;
 }
-
 export default TeamCard;
