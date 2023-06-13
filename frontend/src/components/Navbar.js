@@ -23,7 +23,7 @@ function Navbar() {
           </li>
 
           <li>
-            <Link to="/teams_players">Teams & Players</Link>
+            <Link to="/teams_players/hawks">Teams & Players</Link>
           </li>
         </ul>
 
