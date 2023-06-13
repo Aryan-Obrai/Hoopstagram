@@ -2,6 +2,10 @@
 
 # dependencies
 /frontend/node_modules
+<<<<<<< HEAD
+=======
+/backend/node_modules
+>>>>>>> 5f28d900e76d598809ede4f99fc442f8501d1640
 /backend
 /.pnp
 .pnp.js
