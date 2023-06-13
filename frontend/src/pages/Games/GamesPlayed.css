@@ -27,7 +27,15 @@
 
 .home-team, .away-team {
     display: flex;
-    gap: 20px;
+    gap: 50px;
+}
+
+.home-team {
+    margin-left: 40px;
+}
+
+.away-team {
+    margin-right: 45px;
 }
 
 
