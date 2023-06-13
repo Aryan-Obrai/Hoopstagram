@@ -1,17 +1,28 @@
 import "./Profile.css";
-import { useContext } from "react";
-import { UserContext } from "../../contexts/UserContext";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import TeamCard from "../../components/TeamCard";
 
-function Profile(props) {
-  const { user } = useContext(UserContext);
-  let profileUser;
+function Profile() {
+  const { id } = useParams();
 
-  if (props.profile === "this") {
-    profileUser = user;
-  } else {
-    //fetch the given username's profile info
-  }
+  const [profile, setProfile] = useState("");
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/user/profile/${id}`, {
+      method: "GET",
+      mode: "cors",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setProfile(data.user);
+      });
+  }, []);
 
   return (
     <div id="profile-container">
@@ -22,13 +33,17 @@ function Profile(props) {
           alt="Profile pic"
           width={75}
         ></img>
-        <h1>{profileUser.username}</h1>
+        <h1 id="profile-username">{profile.username}</h1>
       </div>
-      <h2>Favorite Teams</h2>
+      <h2>
+        Favorite Teams <span id="click-msg">(click to view)</span>
+      </h2>
       <div id="favorite-teams-container">
-        {profileUser.favoriteTeams.map((team) => (
-          <TeamCard key={team} team={team} />
-        ))}
+        {profile.favoriteTeams
+          ? profile.favoriteTeams.map((team) => (
+              <TeamCard key={team} team={team} />
+            ))
+          : ""}
       </div>
     </div>
   );

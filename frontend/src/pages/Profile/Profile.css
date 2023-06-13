@@ -10,6 +10,10 @@
     transform: translateX(-50%);
 }
 
+#profile-username {
+    font-size: 1.75rem;
+}
+
 #profile-container:after {
     position: absolute;
     content: "";
@@ -56,4 +60,10 @@
     grid-template-columns: repeat(3, 1fr);
     justify-items: center;
     height: fit-content;
+}
+
+#click-msg {
+    color: var(--accent);
+    font-size: 0.8rem;
+    margin-left: 20px;
 }

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useRef, useState, useContext, useEffect } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import PickTeams from "../../components/PickTeams";
+import GoogleButton from "../../components/Google/GoogleButton";
 
 function Signup() {
   const usernameRef = useRef();
@@ -18,6 +19,9 @@ function Signup() {
   const [donePickingTeams, setDonePickingTeams] = useState(false);
 
   const [tempUserData, setTempUserData] = useState();
+
+  //set google to false if clicked on signup button
+  const [google, setGoogle] = useState(true);
 
   function validSubmission() {
     //submission must be not empty
@@ -35,6 +39,9 @@ function Signup() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+
+    //using passport in backend instead of sending form
+    if (google) return;
 
     if (validSubmission()) {
       const response = await fetch("http://localhost:5000/auth/signup", {
@@ -108,9 +115,14 @@ function Signup() {
           name="password"
           autoComplete="off"
         ></input>
-        <button id="signup-form-btn" type="submit">
+        <button
+          id="signup-form-btn"
+          type="submit"
+          onClick={() => setGoogle(false)}
+        >
           Sign up 🚀
         </button>
+        <GoogleButton />
         <div className="existing-user-prompt">
           <p>Already have an account? Login </p>
           <Link to="/login" className="here">

@@ -29,31 +29,55 @@ const TeamPage = ({ data }) => {
 
   return (
     <div className="team-page">
+      <div className="team-page-info">
+        <img src=""></img>
+      </div>
       <div className="roster">
         <div className="team-roster">
           {data.roster.map((player, index) => (
             <div
               key={player.tid}
-              className={`player-box ${flippedCards.includes(index) ? "flipped" : ""}`}
+              className={`player-box ${
+                flippedCards.includes(index) ? "flipped" : ""
+              }`}
             >
-              <div className="card" onClick={(event) => handleCardClick(event, index)}>
+              <div
+                className="card"
+                onClick={(event) => handleCardClick(event, index)}
+              >
                 <div className="card-inner">
                   <div className="front">
-                    <img className="player-images" src={player.playerIMG} alt="Profile" />
+                    <img
+                      className="player-images"
+                      src={player.playerIMG}
+                      alt="Profile"
+                    />
                     <div className="player-text">
                       <span className="player-name">{player.name}</span>
                       <br />
-                      <span className="player-position">Position: {player.position}</span>
+                      <span className="player-position">
+                        Position: {player.position}
+                      </span>
                     </div>
                   </div>
                   <div className="back">
-                    <img className="player-images-back" src={player.playerIMG} alt="Profile" />
+                    <img
+                      className="player-images-back"
+                      src={player.playerIMG}
+                      alt="Profile"
+                    />
                     <div className="player-details-back">
                       <span className="player-name-back">{player.name}</span>
                       <div className="player-stats-back">
-                        <span className="player-jersey-back">Jersey Number: {player.jerseyNumber}</span>
-                        <span className="player-weight-back">Weight: {player.weight} lbs</span>
-                        <span className="player-height-back">Height: {convertToFeetAndInches(player.height)}</span>
+                        <span className="player-jersey-back">
+                          Jersey Number: {player.jerseyNumber}
+                        </span>
+                        <span className="player-weight-back">
+                          Weight: {player.weight} lbs
+                        </span>
+                        <span className="player-height-back">
+                          Height: {convertToFeetAndInches(player.height)}
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -64,7 +88,7 @@ const TeamPage = ({ data }) => {
         </div>
       </div>
     </div>
-  );  
+  );
 };
 
 export default TeamPage;

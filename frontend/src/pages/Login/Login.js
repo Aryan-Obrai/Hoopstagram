@@ -3,18 +3,22 @@ import { Link, useNavigate } from "react-router-dom";
 import { useRef } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { useContext, useState } from "react";
+import GoogleButton from "../../components/Google/GoogleButton";
 
 function Login() {
-  const usernameRef = useRef();
+  const emailRef = useRef();
   const passwordRef = useRef();
   const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   let [errorMsg, setErrorMsg] = useState("");
 
+  //set google to false if clicked on login button
+  const [google, setGoogle] = useState(true);
+
   function validSubmission() {
     //submission must be not empty
-    if (usernameRef.current.value && passwordRef.current.value) {
+    if (emailRef.current.value && passwordRef.current.value) {
       return true;
     } else {
       setErrorMsg("Please fill out all fields");
@@ -24,6 +28,9 @@ function Login() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+
+    //using passport in backend instead of sending form
+    if (google) return;
 
     if (validSubmission()) {
       const response = await fetch("http://localhost:5000/auth/login", {
@@ -36,7 +43,7 @@ function Login() {
         credentials: "include",
 
         body: JSON.stringify({
-          username: usernameRef.current.value,
+          email: emailRef.current.value,
           password: passwordRef.current.value,
         }),
       });
@@ -59,12 +66,13 @@ function Login() {
       <form id="login-form" onSubmit={(e) => handleSubmit(e)}>
         <h1>Welcome back!</h1>
         {errorMsg ? <p className="error-msg">{errorMsg}</p> : ""}
-        <label htmlFor="username">Username</label>
+        <label htmlFor="email">Email</label>
         <input
-          ref={usernameRef}
-          type="text"
-          id="username"
-          name="username"
+          ref={emailRef}
+          type="email"
+          id="email"
+          name="email"
+          autoComplete="off"
         ></input>
         <label htmlFor="text">Password</label>
         <input
@@ -74,9 +82,15 @@ function Login() {
           name="password"
           autoComplete="off"
         ></input>
-        <button id="login-form-btn" type="submit">
+        <button
+          id="login-form-btn"
+          type="submit"
+          onClick={() => setGoogle(false)}
+        >
           Log in 🏀
         </button>
+        <GoogleButton />
+
         <div className="existing-user-prompt">
           <p>Don't have an account? Sign up </p>
           <Link to="/signup" className="here">

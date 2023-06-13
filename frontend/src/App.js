@@ -7,14 +7,14 @@ import Games from "./pages/Games/Games";
 import TeamsPlayers from "./pages/TeamsPlayers/TeamsPlayers";
 import Signup from "./pages/Signup/Signup";
 import Login from "./pages/Login/Login";
-import PickTeams from "./components/PickTeams";
 import Profile from "./pages/Profile/Profile";
 import ProfileInfo from "./pages/ProfileInfo/ProfileInfo";
-import Post from "./pages/Post/Post"
+import Post from "./pages/Post/Post";
 import { UserContext } from "./contexts/UserContext";
 import { useEffect, useState } from "react";
 import LoggedInRoute from "./protectedRoutes/LoggedInRoute";
 import LoggedOutRoute from "./protectedRoutes/LoggedOutRoute";
+import GoogleAuthError from "./components/Google/GoogleAuthError";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -67,8 +67,7 @@ function App() {
           <Route path="/feed" element={<Feed />} />
           <Route path="/view/:id" element={<Post />} />
           <Route path="/games" element={<Games />} />
-          <Route path="/teams_players" element={<TeamsPlayers />} />
-
+          <Route path="/teams_players/:teamParam" element={<TeamsPlayers />} />
 
           {/* Auth Pages */}
           {/* Must not be logged in to access*/}
@@ -88,6 +87,14 @@ function App() {
               </LoggedOutRoute>
             }
           />
+          <Route
+            path="/auth/google/error"
+            element={
+              <LoggedOutRoute user={user}>
+                <GoogleAuthError />
+              </LoggedOutRoute>
+            }
+          />
 
           {/* Profile Settings Pages */}
           {/* Must be logged in to access*/}
@@ -95,26 +102,11 @@ function App() {
             path="/profile_settings"
             element={
               <LoggedInRoute user={user}>
-                <ProfileInfo />{" "}
+                <ProfileInfo />
               </LoggedInRoute>
             }
           />
-          <Route
-            path="/profile"
-            element={
-              <LoggedInRoute user={user}>
-                <Profile profile={"this"} />
-              </LoggedInRoute>
-            }
-          />
-          <Route
-            path="/pick_teams"
-            element={
-              <LoggedInRoute user={user}>
-                <PickTeams />
-              </LoggedInRoute>
-            }
-          />
+          <Route path="/profile/:id" element={<Profile />} />
         </Routes>
       </UserContext.Provider>
     </div>

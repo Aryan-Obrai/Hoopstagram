@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import "./TeamCard.css";
 import { teams } from "./teamList";
+import { useParams, useNavigate } from "react-router-dom";
 
 function TeamCard(props) {
   const {
@@ -13,21 +14,33 @@ function TeamCard(props) {
     abbreviated,
     pickTeamsView,
     teamsView,
-    setTeamView,
+    loadPage,
   } = props;
 
   let { imgURL, altText, teamFormatted } = setImgUrl(team);
 
   let setWidth = setImgWidth(teamFormatted);
 
+  const { teamParam } = useParams();
+  const navigate = useNavigate();
+
   //weird behavior where setting to false gives intended behavior
   const [selected, setSelected] = useState(true);
+
+  const teamName = team.trim().split(" ");
+  const teamNameFormatted = teamName[teamName.length - 1].toLowerCase();
 
   //pre-apply selected style for logged users' in favorite teams
   useEffect(() => {
     if (!initial && pickTeamsView) {
       if (selectedTeams.includes(team)) {
         setSelected(false);
+      }
+    } else if (teamsView) {
+      if (teamNameFormatted === teamParam) {
+        setSelected(false);
+      } else {
+        setSelected(true);
       }
     }
   }, []);
@@ -48,16 +61,12 @@ function TeamCard(props) {
     }
     //TeamsPlayers.js
     else if (teamsView) {
-      //pass back the index of team in teamList.js
-      setTeamView(
-        Object.keys(teams).findIndex((currTeam) => currTeam === team),
-        // console.log("teamview: " + teamsView)
-      );
+      loadPage(true);
+      navigate(`/teams_players/${teamNameFormatted}`);
     }
     //Profile.js
     else {
-      console.log("teamview: " + teamsView)
-      return;
+      navigate(`/teams_players/${teamNameFormatted}`);
     }
   }
 
@@ -93,13 +102,9 @@ function setImgUrl(team) {
 function setImgWidth(teamFormatted) {
   let setWidth = { width: "45px" };
   //width is dependent on size of img
-  if (teamFormatted === "cavaliers") {
-    setWidth = { width: "100px" };
-  } else if (teamFormatted === "heat") {
-    setWidth = { width: "130px", overflow: "hidden" };
-  } else if (teamFormatted === "grizzlies" || teamFormatted === "spurs") {
-    setWidth = { width: "70px" };
-  } else if (
+  if (
+    teamFormatted === "spurs" ||
+    teamFormatted === "heat" ||
     teamFormatted === "lakers" ||
     teamFormatted === "pistons" ||
     teamFormatted === "jazz" ||
@@ -112,5 +117,4 @@ function setImgWidth(teamFormatted) {
   }
   return setWidth;
 }
-
 export default TeamCard;

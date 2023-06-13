@@ -5,11 +5,8 @@ function GamesDescription() {
     <div>
       <div id="games-description">
         <h1>Games Page</h1>
-        <p>
-          View the latest games here and let the community know your thoughts!
-        </p>
-        <img src="" alt="Games Feed demo"></img>
-        <p>Rate and comment and see what others have to say</p>
+        <p>View the latest games here and keep up with the NBA!</p>
+        <img src="/games-page.png" alt="Games Feed demo"></img>
       </div>
     </div>
   );

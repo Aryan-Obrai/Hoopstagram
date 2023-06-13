@@ -1,31 +1,34 @@
+import React from 'react';
 import "./Feed.css";
-import { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useRef } from "react";
 
-function Feed() {
-  const textRef = useRef();
-  const titleRef = useRef();
-  const navigate = useNavigate();
+class Feed extends React.Component {
+  constructor(props) {
+    super(props);
+    // https://stackoverflow.com/questions/62499061/how-to-use-react-useref-in-class-component
+    this.textRef = React.createRef();
+    this.titleRef = React.createRef();
+    this.state = {
+      data: null,
+      array: null,
+    };
+  }
 
-  let [errorMsg, setErrorMsg] = useState("");
-  function validSubmission() {
-    //submission must be not empty
-    console.log(textRef.current.value)
-    console.log(titleRef.current.value)
-    if (textRef.current.value && titleRef.current.value) 
-    {
+  componentDidMount() {
+    this.getData();
+  }
+
+  validSubmission = () => {
+    if (this.textRef.current.value && this.titleRef.current.value) {
       return true;
     } else {
-      setErrorMsg("Write some text before submitting!");
       return false;
     }
   }
 
-  async function handleSubmit(e) {
+  handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (validSubmission()) {
+    if (this.validSubmission()) {
       const response = await fetch("http://localhost:5000/post/create", {
         method: "POST",
         mode: "cors",
@@ -34,58 +37,92 @@ function Feed() {
           "Content-Type": "application/json",
         },
         credentials: "include",
-
         body: JSON.stringify({
-          title: textRef.current.value,
-          text: textRef.current.value,
+          title: this.titleRef.current.value,
+          text: this.textRef.current.value,
         }),
       });
       const responseData = await response.json();
 
       //error
       if (responseData.errorMsg) {
-        setErrorMsg(responseData.errorMsg);
-        navigate("/login")
+        window.location.href = "/login";
       }
-      //receives user info and sets user context for app
-      else
-      {
-        window.location.reload() // maybe send to post page
+      else {
+        window.location.reload();
       }
     }
   }
 
-  return (
-    <div>
-      <form id="post-form" onSubmit={(e) => handleSubmit(e)}>
-        {errorMsg ? <p className="error-msg">{errorMsg}</p> : ""}
-        <label htmlFor="title">Title</label>
-        <input
-          maxLength={20}
-          ref={titleRef}
-          placeholder="Enter a title..."
-          type="text"
-          id="title"
-          name="title"
-        ></input>
-        <label htmlFor="text">Post Text</label>
-        <textarea
-          ref={textRef}
-          maxLength={1000}
-          placeholder="Post about anything..." 
-          rows="6" 
-          cols="100"
-          type="text"
-          id="text"
-          name="text"
-        ></textarea>
-        <button id="post-form-btn" type="submit">
-          Post
-        </button>
-      </form>
-    </div>
-  )
+  getData = async () => {
+    const response = await fetch("http://localhost:5000/user/feed", {
+      method: "GET",
+      mode: "cors",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    });
+
+    const data = await response.json();
+    this.setState({ data }, () => {
+      this.genArray();
+    });
+    console.log(this.state.data);
+  }
+
+  genArray = () => {
+    const thisArr = this.state.data.map((item, index) => (
+      <div key={index} id="postE">
+        <a className="mid" href={`/view/${item._id}`}>{item.title}</a>
+        <div className="mid">{item.text}</div>
+      </div>
+    ));
+
+    this.setState({ array: thisArr });
+  }
+
+  render() {
+    const { array } = this.state;
+
+    return (
+      <div>
+        <div>
+          <form id="post-form" onSubmit={this.handleSubmit}>
+            <label htmlFor="title">Title</label>
+            <input
+              maxLength={20}
+              ref={this.titleRef}
+              placeholder="Enter a title..."
+              type="text"
+              id="title"
+              name="title"
+            ></input>
+            <label htmlFor="text">Post Text</label>
+            <textarea
+              ref={this.textRef}
+              maxLength={1000}
+              placeholder="Post about anything..."
+              rows="6"
+              cols="100"
+              type="text"
+              id="text"
+              name="text"
+            ></textarea>
+            <button id="post-form-btn" type="submit">
+              Post
+            </button>
+          </form>
+        </div>
+        <div id="posts">
+          <h1 className="postsheader">Posts</h1>
+          <div id="postcontainer">
+            {array ? array : "Head over to the login page to begin viewiewing posts!"}
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
-
 export default Feed;
-
