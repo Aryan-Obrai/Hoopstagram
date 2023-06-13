@@ -12,7 +12,9 @@ router.post("/signup", isValidRequest, (req, res, next) => {
   passport.authenticate("signup", (error, user, info) => {
     if (error) {
       console.log("\nSignupPassportAuthenticate Error: " + error);
-      return res.status(500).send("Server error");
+      return res
+        .status(500)
+        .send({ errorMsg: "Something went wrong. Please try again" });
     }
 
     //user was not able to sign up
