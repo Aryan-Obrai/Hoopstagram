@@ -66,8 +66,7 @@ function TeamCard(props) {
     }
     //Profile.js
     else {
-      console.log("teamview: " + teamsView);
-      return;
+      navigate(`/teams_players/${teamNameFormatted}`);
     }
   }
 

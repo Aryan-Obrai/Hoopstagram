@@ -35,7 +35,9 @@ function Profile() {
         ></img>
         <h1 id="profile-username">{profile.username}</h1>
       </div>
-      <h2>Favorite Teams</h2>
+      <h2>
+        Favorite Teams <span id="click-msg">(click to view)</span>
+      </h2>
       <div id="favorite-teams-container">
         {profile.favoriteTeams
           ? profile.favoriteTeams.map((team) => (

@@ -4,7 +4,6 @@ import TeamPage from "../../components/TeamPage";
 import { teams } from "../../components/teamList";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-//import { teams } from "../../components/teamList";
 
 function TeamsPlayers() {
   const [refresh, setRefresh] = useState(false);
