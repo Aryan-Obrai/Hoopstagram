@@ -1,3 +1,8 @@
+.teams-players-container {
+    position: relative;
+    height: 100vh;
+}
+
 #teams {
     display: grid;
     position: absolute;
@@ -35,4 +40,42 @@
     position: absolute;
     top: 50%;
     left: 50%;
+}
+
+.teams-players-data {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.teams-players-details {
+    align-items: center;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin: 10px auto 50px;
+}
+
+.teams-players-details h1 {
+    color: white;
+    font-size: 3.5rem;
+    margin: 0;
+}
+
+.teams-players-details h1:after {
+    background: var(--accent);
+    position: absolute;
+    content: '';
+    height: 3px;
+    top: 125px;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    width: 80%;
+}
+
+
+.teams-players-details img {
+    align-self: center;
 }

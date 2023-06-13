@@ -3,14 +3,30 @@ import TeamCard from "../../components/TeamCard";
 import TeamPage from "../../components/TeamPage";
 import { teams } from "../../components/teamList";
 import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+//import { teams } from "../../components/teamList";
 
 function TeamsPlayers() {
-  //teamView is set when a TeamCard is clicked on
-  const [teamView, setTeamView] = useState(0);
+  const [refresh, setRefresh] = useState(false);
   const [teamData, setTeamData] = useState(null);
+  const { teamParam } = useParams();
+  const navigate = useNavigate();
+  let teamID = Object.keys(teams).findIndex(findTeamID);
+
+  let imgDetails = setImgUrl(teamParam);
+  let setWidth = setImgWidth(teamParam);
+
+  function findTeamID(team) {
+    const teamName = team.trim().split(" ");
+    const teamNameFormatted = teamName[teamName.length - 1].toLowerCase();
+
+    if (teamNameFormatted === teamParam) {
+      return true;
+    }
+    return false;
+  }
 
   useEffect(() => {
-    setTeamData(null);
     fetch("http://localhost:5000/stats/teams_players", {
       method: "POST",
       mode: "cors",
@@ -19,18 +35,23 @@ function TeamsPlayers() {
         "Content-Type": "application/json",
       },
       credentials: "include",
-      body: JSON.stringify({ teamID: teamView }),
+      body: JSON.stringify({ teamID: teamID }),
     })
       .then((res) => res.json())
       .then((data) => {
         //players returned here
-        console.log(data);
         setTeamData(data);
       });
-  }, [teamView]);
+  }, []);
+
+  useEffect(() => {
+    if (refresh) {
+      navigate(0);
+    }
+  }, [refresh, navigate]);
 
   return (
-    <div>
+    <div className="teams-players-container">
       <div id="teams">
         {Object.keys(teams).map((team) => (
           <TeamCard
@@ -38,16 +59,50 @@ function TeamsPlayers() {
             team={team}
             abbreviated={true}
             teamsView={true}
-            setTeamView={setTeamView}
+            loadPage={setRefresh}
           />
         ))}
       </div>
-      <div>
-      <br></br>
-      {teamView !== null && <TeamPage data={teamData}/>}
+      <div className="teams-players-data">
+        <div className="teams-players-details">
+          <img
+            src={imgDetails.imgURL}
+            alt={imgDetails.altText}
+            style={setWidth}
+          ></img>
+          <h1>{Object.keys(teams)[teamID]}</h1>
+        </div>
+        {teamData && <TeamPage data={teamData} />}
       </div>
     </div>
   );
+}
+
+function setImgUrl(team) {
+  const imgURL = "/logos/" + team + ".png";
+
+  const altText = team + " Logo";
+
+  return { imgURL, altText };
+}
+
+function setImgWidth(teamFormatted) {
+  let setWidth = { width: "80px" };
+  //width is dependent on size of img
+  if (
+    teamFormatted === "spurs" ||
+    teamFormatted === "heat" ||
+    teamFormatted === "lakers" ||
+    teamFormatted === "pistons" ||
+    teamFormatted === "jazz" ||
+    teamFormatted === "magic" ||
+    teamFormatted === "knicks" ||
+    teamFormatted === "hornets" ||
+    teamFormatted === "pelicans"
+  ) {
+    setWidth = { width: "95px" };
+  }
+  return setWidth;
 }
 
 export default TeamsPlayers;

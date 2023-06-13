@@ -67,7 +67,7 @@ function App() {
           <Route path="/feed" element={<Feed />} />
           <Route path="/view/:id" element={<Post />} />
           <Route path="/games" element={<Games />} />
-          <Route path="/teams_players" element={<TeamsPlayers />} />
+          <Route path="/teams_players/:teamParam" element={<TeamsPlayers />} />
 
           {/* Auth Pages */}
           {/* Must not be logged in to access*/}
@@ -102,7 +102,7 @@ function App() {
             path="/profile_settings"
             element={
               <LoggedInRoute user={user}>
-                <ProfileInfo />{" "}
+                <ProfileInfo />
               </LoggedInRoute>
             }
           />
