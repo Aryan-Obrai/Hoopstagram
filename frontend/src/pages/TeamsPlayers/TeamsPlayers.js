@@ -10,12 +10,8 @@ function TeamsPlayers() {
   const [teamData, setTeamData] = useState(null);
 
   useEffect(() => {
-<<<<<<< HEAD
-    fetch("http://localhost:5000/stats/teams_players", {
-=======
     setTeamData(null);
-    fetch("http://localhost:5000/user/teams_players", {
->>>>>>> 5f28d900e76d598809ede4f99fc442f8501d1640
+    fetch("http://localhost:5000/stats/teams_players", {
       method: "POST",
       mode: "cors",
       headers: {
