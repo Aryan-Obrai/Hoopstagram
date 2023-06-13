@@ -11,8 +11,6 @@ function GamesPlayed(props) {
   let homeWidth = setImgWidth(game.home_team.name.toLowerCase());
   let awayWidth = setImgWidth(game.visitor_team.name.toLowerCase());
 
-  console.log(homeImg);
-
   return (
     <div className="gameDivision">
       <div className="team-type">
@@ -30,7 +28,10 @@ function GamesPlayed(props) {
             style={homeWidth}
           ></img>
         </div>
-        <div className="score"></div>
+        <div className="score">
+          <h3>{game.home_team_score}</h3> <h3>-</h3>{" "}
+          <h3>{game.visitor_team_score}</h3>
+        </div>
         <div className="away-team">
           <img
             src={awayImg.imgURL}
@@ -39,10 +40,6 @@ function GamesPlayed(props) {
           ></img>
           <p>{game.visitor_team.abbreviation}</p>
         </div>
-      </div>
-
-      <div className="clickView">
-        <button>|Click to view comments|</button>
       </div>
     </div>
   );

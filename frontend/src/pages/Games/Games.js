@@ -34,7 +34,7 @@ function Games() {
     setGames((prevGames) => [...prevGames, ...responseData.games]);
 
     //no more left
-    if (index === 84) {
+    if (index === 16) {
       setHasMore(false);
     }
     //increment for next fetch
@@ -48,9 +48,9 @@ function Games() {
           dataLength={games.length}
           next={fetchData}
           hasMore={hasMore}
-          loader={<h4>Loading...</h4>}
+          loader={<h4 style={{ color: "white" }}>Loading...</h4>}
           endMessage={
-            <p style={{ textAlign: "center" }}>
+            <p id="endMessage">
               <b>No more games available.</b>
             </p>
           }
