@@ -49,6 +49,34 @@ class Post extends React.Component {
       }),
     });
     const responseData = await response.json();
+    if (responseData.errorMsg) {
+      window.location.href = "/login";
+    }
+    else {
+      window.location.reload();
+    }
+  }
+  handleDislike = async () =>
+  {
+    const response = await fetch("http://localhost:5000/post/dislike", {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({
+        id: this.state.id,
+      }),
+    });
+    const responseData = await response.json();
+    if (responseData.errorMsg) {
+      window.location.href = "/login";
+    }
+    else {
+      window.location.reload();
+    }
   }
   handleSubmit = async (e) => {
     e.preventDefault();
@@ -67,7 +95,6 @@ class Post extends React.Component {
         }),
       });
       const responseData = await response.json();
-      console.log(responseData)
       //error
       if (responseData.errorMsg) {
         window.location.href = "/login";
@@ -168,9 +195,9 @@ class Post extends React.Component {
               </div>
             ) : ""}
             <div id="ratebtns">
-                <button className="midbtn" onClick={this.handleLike}>Like</button>
+                { this.state.data.liked ? <button className="midbtn sel" onClick={this.handleLike}>Liked</button> :                 <button className="midbtn" onClick={this.handleLike}>Like</button>}
                 <a>{this.state.data.post.likes}</a>
-                <button className="midbtn" onClick={this.handleDislike}>Dislike</button>
+                {this.state.data.disliked ? <button className="midbtn sel" onClick={this.handleDislike}>Disliked</button> :                 <button className="midbtn" onClick={this.handleDislike}>Dislike</button>}
             </div>
           </div>
           <div id="commentdiv">

@@ -128,5 +128,12 @@
 
 #ratebtns
 {
-    position: relative;
+    position: absolute;
+    top: 88%;
+    left: 77%;
+}
+
+.sel
+{
+    color: plum;
 }

@@ -20,12 +20,33 @@ router.get("/view/:id", async (req, res) => {
     console.log(req.user)
     if (req.user)
     {
-
         ownpost = author === req.user[0].username
     }
     else ownpost = false
 
-    res.send({post, author, ownpost})
+    let liked = false
+    let disliked = false
+    let k = 0
+    if (req.user)
+    {
+        usersLiked = post.usersLiked
+        for (k = 0; k < usersLiked.length; k++) {
+            if (usersLiked[k].username == req.user[0].username) {
+              liked = true
+              break;
+            }
+        }
+        usersDisliked = post.usersDisliked
+        for (k = 0; k < usersDisliked.length; k++) {
+            if (usersDisliked[k].username == req.user[0].username) {
+              disliked = true
+              break;
+            }
+        }
+    }
+
+
+    res.send({post, author, ownpost, liked, disliked})
 });
 
 router.get("/comments/:post", async (req, res) =>
@@ -109,27 +130,32 @@ router.post("/like", async (req, res) => {
         });
         const post = await Post.findById(id)
         usersLiked = post.usersLiked
-        usersLiked.forEach((u, i) =>{
-            console.log(u.id)
-            if (u.id == user.id)
-            {
-                usersLiked = post.usersLiked
-                usersLiked.splice(i, 1)
-                likes = post.likes
-                likes = likes - 1;
-                f = true
+        likes = post.likes
+        for (let i = 0; i < usersLiked.length; i++) {
+            if (usersLiked[i].username == req.user[0].username) {
+              usersLiked.splice(i, 1);
+              f = true;
+              likes = likes - 1;
+              break;
             }
-        })
+          }
 
+        usersDisliked = post.usersDisliked
         if (!f)
         {
-            likes = post.likes
+            for (let k = 0; k < usersDisliked.length; k++) {
+                if (usersDisliked[k].username == req.user[0].username) {
+                  usersDisliked.splice(k, 1);
+                  likes = likes + 1;
+                  break;
+                }
+            }
             likes = likes + 1;
             usersLiked.push(user)
         }
-
         await Post.findByIdAndUpdate(id, {usersLiked, likes})
-        console.log(post)
+        await Post.findByIdAndUpdate(id, {usersDisliked, likes})
+
         res.send({msg: "LIKED"})
     }
 });
@@ -137,34 +163,40 @@ router.post("/like", async (req, res) => {
 router.post("/dislike", async (req, res) => {
     if (req.user)
     {
-        const { title } = req.body
+        let f = false
+        const { id } = req.body
         const user = await User.findOne({
             username: req.user[0].username,
         });
-        const post = await Post.findOne({
-            title
-        })
-        if (post.usersDisliked)
-        {
-            post.usersDisliked.forEach((u, i) =>{
-                if (u == user)
-                {
-                    usersDisliked = post.usersDisliked
-                    usersDisliked.splice(i, 1)
-                    likes = post.likes
-                    likes = likes + 1;
-                    Post.findOneAndUpdate({title}, {usersDisliked})
-                    Post.findOneAndUpdate({title}, {likes})
-                    res.send({msg: "LIKED"})
-                }
-            })
-        }
+        const post = await Post.findById(id)
         usersDisliked = post.usersDisliked
         likes = post.likes
-        likes = likes - 1;
-        usersDisliked.push(user)
-        Post.findOneAndUpdate({title}, {usersDisliked})
-        Post.findOneAndDelete({title}, {likes})
+        for (let i = 0; i < usersDisliked.length; i++) {
+            if (usersDisliked[i].username == req.user[0].username) {
+              usersDisliked.splice(i, 1);
+              f = true;
+              likes = likes + 1;
+              break;
+            }
+          }
+
+        usersLiked = post.usersLiked
+        if (!f)
+        {
+            for (let k = 0; k < usersLiked.length; k++) {
+                if (usersLiked[k].username == req.user[0].username) {
+                  usersLiked.splice(k, 1);
+                  likes = likes - 1;
+                  break;
+                }
+            }
+            likes = likes - 1;
+            usersDisliked.push(user)
+        }
+        await Post.findByIdAndUpdate(id, {usersLiked, likes})
+        await Post.findByIdAndUpdate(id, {usersDisliked, likes})
+
+        res.send({msg: "DISLIKED"})
 
     }
 
